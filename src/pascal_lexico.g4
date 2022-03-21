@@ -5,7 +5,7 @@
 grammar MiniPascal;
 
 cabecalho
-    : 'program' identificador ';' bloco
+    : 'program' IDENTIFICADOR ';' bloco
     ;
 
 bloco
@@ -18,7 +18,7 @@ declaracaoVariavel
     ;
 
 valorVariavel
-    : identificador (',' identificador)* ':' tipo
+    : IDENTIFICADOR (',' IDENTIFICADOR)* ':' tipo
     ;
 
 tipo
@@ -31,7 +31,7 @@ tipoVetor
     ;
 
 tamanhoIndice
-    : constanteInteira '..' constanteInteira
+    : CONSTANTEINTEIRA '..' CONSTANTEINTEIRA
     ;
 
 tipoSimples
@@ -135,40 +135,40 @@ operadorMultiplicativo
 
 
 variavel
-    : identificador
+    : IDENTIFICADOR
     | variavelAnexada
     ;
 
 variavelAnexada
-    : identificador '[' expressao ']'
+    : IDENTIFICADOR '[' expressao ']'
     ;
 
 
 
-constante
-    : constanteInteira
-    | constanteCaractere
-    | identificador
+CONSTANTE
+    : CONSTANTEINTEIRA
+    | CONSTANTECARACTERE
+    | IDENTIFICADOR
     ;
 
-identificador
-    : letra (letraOuDigito)*
+IDENTIFICADOR
+    : LETRA (LETRAOUDIGITO)*
     ;
 
-letraOuDigito
-    : letra
-    | digito
+LETRAOUDIGITO
+    : LETRA
+    | DIGITO
     ;
 
-constanteInteira
-    : digito (digito)*
+CONSTANTEINTEIRA
+    : DIGITO (DIGITO)*
     ;
 
-constanteCaractere
-    : '\'' letraOuDigito '\''
-    | '\"' letraOuDigito (letraOuDigito)* '\"'
+CONSTANTECARACTERE
+    : '\'' LETRAOUDIGITO '\''
+    | '\"' LETRAOUDIGITO (LETRAOUDIGITO)* '\"'
 
-letra
+LETRA
     : 'a'
     | 'b'
     | 'c'
@@ -222,7 +222,7 @@ letra
     | 'Z'
     ;
 
-digito
+DIGITO
     : 0
     | 1
     | 2
@@ -235,7 +235,7 @@ digito
     | 9
     ;
 
-simboloEspecial
+SIMBOLOESPECIAL
     : '+'
     | '-'
     | '*'
