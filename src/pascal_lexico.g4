@@ -14,7 +14,7 @@ bloco
 
 declaracaoVariavel
     : empty
-    | 'var' valorVariavel ';' (valorVariavel ';')* //TODO: "var" não é caso-sensível
+    | VAR valorVariavel ';' (valorVariavel ';')* //TODO: "var" não é caso-sensível
     ;
 
 valorVariavel
@@ -27,7 +27,7 @@ tipo
     ;
 
 tipoVetor
-    : array '[' tamanhoIndice ']' of tipoSimples //TODO: "array" e "of" não são caso-sensíveis
+    : ARRAY '[' tamanhoIndice ']' OF tipoSimples //TODO: "array" e "of" não são caso-sensíveis
     ;
 
 tamanhoIndice
@@ -42,7 +42,7 @@ tipoSimples
     ;
 
 declaracaoComposta
-    : begin declaracao (';' declaracao)* end //TODO: "begin" e "end" não são caso-sensíves
+    : BEGIN declaracao (';' declaracao)* END //TODO: "begin" e "end" não são caso-sensíves
     ;
 
 declaracao
@@ -62,11 +62,11 @@ declaracaoAtributo
     ;
 
 declaracaoRead
-    : read '(' variavel (',' variavel)* ')' //TODO: "read" não é caso-sensível
+    : READ '(' variavel (',' variavel)* ')' //TODO: "read" não é caso-sensível
     ;
 
 declaracaoWrite
-    : write '(' variavel (',' variavel)* ')'
+    : WRITE '(' variavel (',' variavel)* ')' //TODO: "write" não é caso-sensível
     ;
 
 declaracaoEstrutural
@@ -76,12 +76,12 @@ declaracaoEstrutural
     ;
 
 declaracaoIf //TODO: "if", "then" e "else" não são caso-sensíveis
-    : if expressao then declaracao
-    | if expressao then declaracao else declaracao
+    : IF expressao THEN declaracao
+    | IF expressao THEN declaracao ELSE declaracao
     ;
 
 declaracaoWhile
-    : while expressao do declaracao //TODO: "whie" e "do" não são caso-sensíveis
+    : WHILE expressao DO declaracao //TODO: "while" e "do" não são caso-sensíveis
 
 
 expressao
@@ -101,7 +101,7 @@ fator
     : variavel
     | declaracaoComposta
     | '(' expressao ')'
-    | not fator //TODO: "not" não é caso-sensível
+    | NOT fator //TODO: "not" não é caso-sensível
     ;
 
 
@@ -113,8 +113,8 @@ operadorRelacional
     | '<='
     | '>='
     | '>'
-    | or
-    | and //TODO: "or" e "and" não são caso-sensíveis
+    | OR
+    | AND //TODO: "or" e "and" não são caso-sensíveis
     ;
 
 sinal
@@ -130,7 +130,7 @@ operadorAditivo
 
 operadorMultiplicativo
     : '*'
-    | div //TODO: div não é caso-sensível
+    | DIV //TODO: div não é caso-sensível
     ;
 
 
@@ -196,30 +196,30 @@ SIMBOLOESPECIAL
     | ':'
     | '..'
     //TODO: À partir daqui, não são caso-sensíveis
-    | div
-    | or
-    | and
-    | not
-    | if
-    | then
-    | else
-    | of
-    | while
-    | do
-    | begin
-    | end
-    | read
-    | write
-    | var
-    | array
-    | function
-    | procedure
-    | program
-    | true
-    | false
-    | char
-    | integer
-    | boolean
+    | DIV
+    | OR
+    | AND
+    | NOT
+    | IF
+    | THEN
+    | ELSE
+    | OF
+    | WHILE
+    | DO
+    | BEGIN
+    | END
+    | READ
+    | WRITE
+    | VAR
+    | ARRAY
+    | FUNCTION
+    | PROCEDURE
+    | PROGRAM
+    | TRUE
+    | FALSE
+    | CHAR
+    | INTEGER
+    | BOOLEAN
     ;
 
 WS
@@ -230,3 +230,134 @@ empty:
     //Vazio ajsjasjaj
     ;
 
+
+
+fragment A
+    : 'a'
+    | 'A'
+    ;
+
+fragment B
+    : 'b'
+    | 'B'
+    ;
+
+fragment C
+    : 'c'
+    | 'C'
+    ;
+
+fragment D
+    : 'd'
+    | 'D'
+    ;
+
+fragment E
+    : 'e'
+    | 'E'
+    ;
+
+fragment F
+    : 'f'
+    | 'F'
+    ;
+
+fragment G
+    : 'g'
+    | 'G'
+    ;
+
+fragment H
+    : 'h'
+    | 'H'
+    ;
+
+fragment I
+    : 'i'
+    | 'I'
+    ;
+
+fragment J
+    : 'j'
+    | 'J'
+    ;
+
+fragment K
+    : 'k'
+    | 'K'
+    ;
+
+fragment L
+    : 'l'
+    | 'L'
+    ;
+
+fragment M
+    : 'm'
+    | 'M'
+    ;
+
+fragment N
+    : 'n'
+    | 'N'
+    ;
+
+fragment O
+    : 'o'
+    | 'O'
+    ;
+
+fragment P
+    : 'p'
+    | 'P'
+    ;
+
+fragment Q
+    : 'q'
+    | 'Q'
+    ;
+
+fragment R
+    : 'r'
+    | 'R'
+    ;
+
+fragment S
+    : 's'
+    | 'S'
+    ;
+
+fragment T
+    : 't'
+    | 'T'
+    ;
+
+fragment U
+    : 'u'
+    | 'U'
+    ;
+
+fragment V
+    : 'v'
+    | 'V'
+    ;
+
+fragment W
+    : 'w'
+    | 'W'
+    ;
+
+fragment X
+    : 'x'
+    | 'X'
+    ;
+
+fragment Y
+    : 'y'
+    | 'Y'
+    ;
+
+fragment Z
+    : 'z'
+    | 'Z'
+    ;
