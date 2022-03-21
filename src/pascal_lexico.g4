@@ -35,9 +35,9 @@ tamanhoIndice
     ;
 
 tipoSimples
-    : char
-    | integer
-    | boolean
+    : CHAR
+    | INTEGER
+    | BOOLEAN
     //TODO: Não são caso-sensíveis
     ;
 
@@ -82,7 +82,7 @@ declaracaoIf //TODO: "if", "then" e "else" não são caso-sensíveis
 
 declaracaoWhile
     : WHILE expressao DO declaracao //TODO: "while" e "do" não são caso-sensíveis
-
+    ;
 
 expressao
     : expressaoSimples
@@ -166,7 +166,8 @@ CONSTANTEINTEIRA
 
 CONSTANTECARACTERE
     : '\'' LETRAOUDIGITO '\''
-    | '\"' LETRAOUDIGITO (LETRAOUDIGITO)* '\"'
+    | '"' LETRAOUDIGITO (LETRAOUDIGITO)* '"'
+    ;
 
 LETRA
     : [a-z]
@@ -187,7 +188,6 @@ SIMBOLOESPECIAL
     | '>'
     | '<='
     | '>='
-    | '>'
     | ('|')* '|' ('|')* //FIXME: Correto?
     | ':='
     | '.'
@@ -223,7 +223,7 @@ SIMBOLOESPECIAL
     ;
 
 WS
-   : [ \t\r\n ] -> skip
+   : [ \t\r\n] -> skip
    ;
 
 empty:
@@ -364,6 +364,10 @@ fragment Z
 
 
 //Casos-insensíveis
+
+DIV
+    : D I V
+    ;
 
 OR
     : O R
