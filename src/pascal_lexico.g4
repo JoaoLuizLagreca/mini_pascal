@@ -5,7 +5,7 @@
 grammar MiniPascal;
 
 cabecalho
-    : 'program' IDENTIFICADOR ';' bloco
+    : PROGRAM IDENTIFICADOR ';' bloco
     ;
 
 bloco
@@ -360,4 +360,99 @@ fragment Y
 fragment Z
     : 'z'
     | 'Z'
+    ;
+
+
+//Casos-insensíveis
+
+OR
+    : O R
+    ;
+
+AND
+    : A N D
+    ;
+
+NOT
+    : N O T
+    ;
+
+IF
+    : I F
+    ;
+
+THEN
+    : T H E N
+    ;
+
+ELSE
+    : E L S E
+    ;
+
+OF
+    : O F
+    ;
+
+WHILE
+    : W H I L E
+    ;
+
+DO
+    : D O
+    ;
+
+BEGIN
+    : B E G I N
+    ;
+
+END
+    : E N D
+    ;
+
+READ
+    : R E A D
+    ;
+
+WRITE
+    : W R I T E
+    ;
+
+VAR
+    : V A R
+    ;
+
+ARRAY
+    : A R R A Y
+    ;
+
+FUNCTION
+    : F U N C T I O N
+    ;
+
+PROCEDURE
+    : P R O C E D U R E
+    ;
+
+PROGRAM
+    : P R O G R A M
+    ;
+
+TRUE
+    : T R U E
+    ;
+
+FALSE
+    : F A L S E
+    ;
+
+CHAR
+    : C H A R
+    ;
+
+INTEGER
+    : I N T E G E R
+    ;
+
+BOOLEAN
+    : B O O L E A N
     ;
