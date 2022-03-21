@@ -14,7 +14,7 @@ bloco
 
 declaracaoVariavel
     : empty
-    | var valorVariavel ';' (valorVariavel ';')* //TODO: "var" não é caso-sensível
+    | 'var' valorVariavel ';' (valorVariavel ';')* //TODO: "var" não é caso-sensível
     ;
 
 valorVariavel
@@ -278,5 +278,9 @@ simboloEspecial
     | char
     | integer
     | boolean
+    ;
+
+empty:
+    //Vazio ajsjasjaj
     ;
 
