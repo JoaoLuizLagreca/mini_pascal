@@ -12,4 +12,4 @@ mv src/br/senac/minipascal/compiler/lexico/src/* src/br/senac/minipascal/compile
 rm -r src/br/senac/minipascal/compiler/lexico/src
 
 echo "Compilando analisador lexico..."
-javac src/br/senac/minipascal/compiler/lexico/*.java -o build/lexico
+javac src/br/senac/minipascal/compiler/lexico/*.java -d build/lexico/
