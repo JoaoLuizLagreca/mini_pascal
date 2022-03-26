@@ -132,6 +132,10 @@ letra
 empty:
     ;
 
+WS
+   : [ \t\r\n] -> skip
+   ;
+
 /*TODO: Casos insensíveis
  OR
  DIV
