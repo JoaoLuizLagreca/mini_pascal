@@ -12,7 +12,7 @@ identificador
     :letra (letra | digito)*
     ;
 
-letra:
+letra
     : '_'
     | [a-z]
     | [A-Z]
