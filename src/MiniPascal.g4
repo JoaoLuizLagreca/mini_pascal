@@ -57,7 +57,9 @@ letra
     | [A-Z]
     ;
 
-fragment empty:
+
+
+empty:
     ;
 
 /*TODO: Casos insensíveis
