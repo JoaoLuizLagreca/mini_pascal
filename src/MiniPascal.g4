@@ -1,5 +1,34 @@
 grammar MiniPascal;
 
+//Declarações
+partDeclVar
+    : declVar (';' tipo listaIdentificadores)* ';'
+    ;
+
+declVar
+    : tipo listaIdentificadores
+    ;
+
+listaIdentificadores
+    : identificador (',' identificador)*
+    ;
+
+partDeclSubRot
+    : (declProc ';')*
+    ;
+
+declProc
+    : PROCEDURE identificador (parFormais | empty) ';' bloco
+    ;
+
+parFormais
+    : '(' secParFormais (';' secParFormais)* ')'
+    ;
+
+secParFormais
+    : '[' VAR ']' listaIdentificadores ':' identificador
+    ;
+
 //Comandos
 comandoComposto
     : BEGIN comand '{;' comand '}' END
@@ -103,4 +132,6 @@ empty:
  ELSE
  WHILE
  DO
+ PROCEDURE
+ VAR
  */
