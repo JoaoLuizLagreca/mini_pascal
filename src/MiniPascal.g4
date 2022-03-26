@@ -1,5 +1,8 @@
 grammar MiniPascal;
 
+
+
+//Números e identificadores
 numero
     : digito (digito)*
     ;
@@ -9,7 +12,7 @@ digito
     ;
 
 identificador
-    :letra (letra | digito)*
+    : letra (letra | digito)*
     ;
 
 letra
