@@ -1,5 +1,17 @@
 grammar MiniPascal;
 
+//Programa e Bloco
+programa
+    : PROGRAM identificador ';'
+    bloco '.'
+    ;
+
+bloco
+    : (partDeclVar | empty)
+    (partDeclSubRot | empty)
+    comandoComposto
+    ;
+
 //Declarações
 partDeclVar
     : declVar (';' tipo listaIdentificadores)* ';'
@@ -134,4 +146,5 @@ empty:
  DO
  PROCEDURE
  VAR
+ PROGRAM
  */
