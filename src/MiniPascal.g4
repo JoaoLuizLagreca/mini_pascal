@@ -1,5 +1,34 @@
 grammar MiniPascal;
 
+//Comandos
+comandoComposto
+    : BEGIN comand '{;' comand '}' END
+    ;
+
+comando
+    : atribuicao
+    | chamadaProcedimento
+    | comandoComposto
+    | comandoCondicional
+    | comandoRepetitivo
+    ;
+
+atribuicao
+    : variavel ':=' expressao
+    ;
+
+chamadaProcedimento
+    : identificador ('(' listaExpressoes ')' | empty)
+    ;
+
+comandoCondicional
+    : IF expressao THEN comand ((ELSE comando) | empty)
+    ;
+
+comandoRepetitivo
+    : WHILE expressao DO comando
+    ;
+
 //Expressões
 expressao
     : expressaoSimples ((relacao expressaoSimples) | empty)
@@ -67,4 +96,11 @@ empty:
  DIV
  AND
  NOT
+ BEGIN
+ END
+ IF
+ THEN
+ ELSE
+ WHILE
+ DO
  */
