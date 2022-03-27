@@ -8,7 +8,15 @@ ADO de Teoria da Computação e Compiladores na universidade SENAC
 
 ❌Interpretador ou compilador
 
-✅ = Finalizado ; ☑ = Finalizado, mas precisa de correção ; 🟠 = Em desenvolvimento ; ❌ = Não realizado
+## Legenda
+
+✅ = Finalizado
+
+☑ = Finalizado, mas precisa de correção
+
+🟠 = Em desenvolvimento 
+
+❌ = Não realizado
 
 # Integrantes
 [@ftimoti](https://github.com/ftimoti)
