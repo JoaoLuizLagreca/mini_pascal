@@ -43,7 +43,7 @@ secParFormais
 
 //Comandos
 comandoComposto
-    : BEGIN comand '{;' comand '}' END
+    : BEGIN comando '{;' comando '}' END
     ;
 
 comando
@@ -63,7 +63,7 @@ chamadaProcedimento
     ;
 
 comandoCondicional
-    : IF expressao THEN comand ((ELSE comando) | empty)
+    : IF expressao THEN comando ((ELSE comando) | empty)
     ;
 
 comandoRepetitivo
@@ -71,6 +71,11 @@ comandoRepetitivo
     ;
 
 //Expressões
+
+tipo
+    : Letra (Letra)*
+    ;
+
 expressao
     : expressaoSimples ((relacao expressaoSimples) | empty)
     ;
@@ -105,23 +110,23 @@ variavel
     ;
 
 listaExpressoes
-    : expressao (',' empressao)*
+    : expressao (',' expressao)*
     ;
 
 //Números e identificadores
 numero
-    : digito (digito)*
+    : Digito (Digito)*
     ;
 
-digito
+Digito
     : [0-9]
     ;
 
 identificador
-    : letra (letra | digito)*
+    : Letra (Letra | Digito)*
     ;
 
-letra
+Letra
     : '_'
     | [a-z]
     | [A-Z]
