@@ -43,7 +43,7 @@ secParFormais
 
 //Comandos
 comandoComposto
-    : BEGIN comando '{;' comando '}' END
+    : BEGIN comando (';' comando )* END
     ;
 
 comando
@@ -90,7 +90,7 @@ relacao
     ;
 
 expressaoSimples
-    : ('+' | '-') termo (('+' | '-' | OR) termo)*
+    : ('+' | '-' | empty) termo (('+' | '-' | OR) termo)*
     ;
 
 termo
@@ -101,6 +101,7 @@ fator
     : variavel
     | numero
     | '(' expressao ')'
+    | Frase
     | NOT fator
     ;
 
@@ -132,6 +133,10 @@ Letra
     | [A-Z]
     ;
 
+Frase
+    : '"' ~[<"]* '"'
+    |'\'' ~[<']* '\''
+    ;
 
 
 empty:
