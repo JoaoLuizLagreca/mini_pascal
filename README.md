@@ -27,6 +27,11 @@ Gian Megiolaro
 
 [@JoaoLuizLagreca](https://github.com/JoaoLuizLagreca)
 
+# Dependências
+- ANTLR4
+- OpenJDK
+- unzip
+
 # Build
 Nota: O projeto foi compilado no Manjaro, outras distribuições Arch linux podem funcionar, outros sistemas operacionais como Ubuntu, Debian, Windows, *BSDs podem precisar de modificações para compilar
 
