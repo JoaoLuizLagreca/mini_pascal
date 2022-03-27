@@ -7,7 +7,7 @@ export CLASSPATH=".:/usr/share/java/antlr-$ver-complete.jar:$CLASSPATH"
 echo "livrarias: $CLASSPATH"
 
 echo "Construindo arquivos java..."
-antlr4 src/MiniPascal.g4 -o src/br/senac/minipascal/compiler/lexico
+antlr4 src/MiniPascal.g4 -package br.senac.minipascal.compiler.lexico -o src/br/senac/minipascal/compiler/lexico
 mv src/br/senac/minipascal/compiler/lexico/src/* src/br/senac/minipascal/compiler/lexico
 rm -r src/br/senac/minipascal/compiler/lexico/src
 
