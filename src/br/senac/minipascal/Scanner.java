@@ -2,8 +2,8 @@ package br.senac.minipascal;
 
 import br.senac.minipascal.compiler.lexico.MiniPascalLexer;
 import br.senac.minipascal.compiler.lexico.MiniPascalParser;
-import org.antrl.v4.runtime.CharStreams;
-import org.antrl.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.CharStreams;
+import org.antlr.v4.runtime.CommonTokenStream;
 
 public class Scanner{
 
@@ -19,7 +19,7 @@ public class Scanner{
 
             //cria-se o parser a partir do tokenStream
             parser = new MiniPascalParser(tokenStream);
-            parser.cabecalho();
+            parser.programa();
             System.out.println("Copilação Efetuada com sucesso");
         }
             catch(Exception ex){
