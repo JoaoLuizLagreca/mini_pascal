@@ -12,6 +12,7 @@ javaFiles=$(find src -name "*.java" )
 
 # Compilar
 echo "Compilando..."
+rm -r build/*
 javac $javaFiles -d build && echo "Compilado com sucesso" >&0 || echo "Falha na compilação" >&2
 
 # Empacotar
