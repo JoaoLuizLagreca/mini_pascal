@@ -1,237 +1,149 @@
-//Criado baseado na documentação: http://www.facom.ufms.br/~ricardo/Courses/CompilerI/Lectures/minipascalsyntax.pdf
-//FIXME: NÃO TESTADO
-//TODO: Realizar analisadores léxicos para declarações não caso-sensíveis
-
 grammar MiniPascal;
 
-cabecalho
-    : PROGRAM IDENTIFICADOR ';' bloco
+//Programa e Bloco
+programa
+    : PROGRAM identificador ';'
+    bloco '.'
     ;
 
 bloco
-    : declaracaoVariavel declaracaoComposta
+    : (partDeclVar | empty)
+    (partDeclSubRot | empty)
+    comandoComposto
     ;
 
-declaracaoVariavel
-    : empty
-    | VAR valorVariavel ';' (valorVariavel ';')* //TODO: "var" não é caso-sensível
+//Declarações
+partDeclVar
+    : declVar (';' tipo listaIdentificadores)* ';'
     ;
 
-valorVariavel
-    : IDENTIFICADOR (',' IDENTIFICADOR)* ':' tipo
+declVar
+    : tipo listaIdentificadores
     ;
 
-tipo
-    : tipoSimples
-    | tipoVetor
+listaIdentificadores
+    : identificador (',' identificador)*
     ;
 
-tipoVetor
-    : ARRAY '[' tamanhoIndice ']' OF tipoSimples //TODO: "array" e "of" não são caso-sensíveis
+partDeclSubRot
+    : (declProc ';')*
     ;
 
-tamanhoIndice
-    : CONSTANTEINTEIRA '..' CONSTANTEINTEIRA
+declProc
+    : PROCEDURE identificador (parFormais | empty) ';' bloco
     ;
 
-tipoSimples
-    : CHAR
-    | INTEGER
-    | BOOLEAN
-    //TODO: Não são caso-sensíveis
+parFormais
+    : '(' secParFormais (';' secParFormais)* ')'
     ;
 
-declaracaoComposta
-    : BEGIN declaracao (';' declaracao)* END //TODO: "begin" e "end" não são caso-sensíves
+secParFormais
+    : '[' VAR ']' listaIdentificadores ':' identificador
     ;
 
-declaracao
-    : declaracaoSimples
-    | declaracaoEstrutural
+//Comandos
+comandoComposto
+    : BEGIN comando '{;' comando '}' END
     ;
 
-
-declaracaoSimples
-    : declaracaoAtributo
-    | declaracaoRead
-    | declaracaoWrite
+comando
+    : atribuicao
+    | chamadaProcedimento
+    | comandoComposto
+    | comandoCondicional
+    | comandoRepetitivo
     ;
 
-declaracaoAtributo
+atribuicao
     : variavel ':=' expressao
     ;
 
-declaracaoRead
-    : READ '(' variavel (',' variavel)* ')' //TODO: "read" não é caso-sensível
+chamadaProcedimento
+    : identificador ('(' listaExpressoes ')' | empty)
     ;
 
-declaracaoWrite
-    : WRITE '(' variavel (',' variavel)* ')' //TODO: "write" não é caso-sensível
+comandoCondicional
+    : IF expressao THEN comando ((ELSE comando) | empty)
     ;
 
-declaracaoEstrutural
-    : declaracaoComposta
-    | declaracaoIf
-    | declaracaoWhile
+comandoRepetitivo
+    : WHILE expressao DO comando
     ;
 
-declaracaoIf //TODO: "if", "then" e "else" não são caso-sensíveis
-    : IF expressao THEN declaracao
-    | IF expressao THEN declaracao ELSE declaracao
-    ;
+//Expressões
 
-declaracaoWhile
-    : WHILE expressao DO declaracao //TODO: "while" e "do" não são caso-sensíveis
+tipo
+    : Letra (Letra)*
     ;
 
 expressao
-    : expressaoSimples
-    | expressaoSimples operadorRelacional expressaoSimples
+    : expressaoSimples ((relacao expressaoSimples) | empty)
     ;
 
-expressaoSimples
-    : sinal termo (operadorAditivo termo)*
-    ;
-
-termo
-    : fator (operadorMultiplicativo fator)*
-    ;
-
-fator
-    : variavel
-    | declaracaoComposta
-    | '(' expressao ')'
-    | NOT fator //TODO: "not" não é caso-sensível
-    ;
-
-
-
-operadorRelacional
+relacao
     : '='
     | '<>'
     | '<'
     | '<='
     | '>='
     | '>'
-    | OR
-    | AND //TODO: "or" e "and" não são caso-sensíveis
     ;
 
-sinal
-    : '+'
-    | '-'
-    | empty
+expressaoSimples
+    : ('+' | '-') termo (('+' | '-' | OR) termo)*
     ;
 
-operadorAditivo
-    : '+'
-    | '-'
+termo
+    : fator (('*' | DIV | AND) fator)*
     ;
 
-operadorMultiplicativo
-    : '*'
-    | DIV //TODO: div não é caso-sensível
+fator
+    : variavel
+    | numero
+    | '(' expressao ')'
+    | NOT fator
     ;
-
 
 variavel
-    : IDENTIFICADOR
-    | variavelAnexada
+    : identificador
+    | identificador (expressao | empty)
     ;
 
-variavelAnexada
-    : IDENTIFICADOR '[' expressao ']'
+listaExpressoes
+    : expressao (',' expressao)*
     ;
 
-
-
-CONSTANTE
-    : CONSTANTEINTEIRA
-    | CONSTANTECARACTERE
-    | IDENTIFICADOR
+//Números e identificadores
+numero
+    : Digito (Digito)*
     ;
 
-IDENTIFICADOR
-    : LETRA (LETRAOUDIGITO)*
-    ;
-
-LETRAOUDIGITO
-    : LETRA
-    | DIGITO
-    ;
-
-CONSTANTEINTEIRA
-    : DIGITO (DIGITO)*
-    ;
-
-CONSTANTECARACTERE
-    : '\'' LETRAOUDIGITO '\''
-    | '"' LETRAOUDIGITO (LETRAOUDIGITO)* '"'
-    ;
-
-LETRA
-    : [a-z]
-    | [A-Z]
-    ;
-
-DIGITO
+Digito
     : [0-9]
     ;
 
-SIMBOLOESPECIAL
-    : '+'
-    | '-'
-    | '*'
-    | '='
-    | '<>'
-    | '<'
-    | '>'
-    | '<='
-    | '>='
-    | ('|')* '|' ('|')* //FIXME: Correto?
-    | ':='
-    | '.'
-    | ','
-    | ';'
-    | ':'
-    | '..'
-    //TODO: À partir daqui, não são caso-sensíveis
-    | DIV
-    | OR
-    | AND
-    | NOT
-    | IF
-    | THEN
-    | ELSE
-    | OF
-    | WHILE
-    | DO
-    | BEGIN
-    | END
-    | READ
-    | WRITE
-    | VAR
-    | ARRAY
-    | FUNCTION
-    | PROCEDURE
-    | PROGRAM
-    | TRUE
-    | FALSE
-    | CHAR
-    | INTEGER
-    | BOOLEAN
+identificador
+    : Letra (Letra | Digito)*
+    ;
+
+Letra
+    : '_'
+    | [a-z]
+    | [A-Z]
+    ;
+
+
+
+empty:
     ;
 
 WS
    : [ \t\r\n] -> skip
    ;
 
-empty:
-    //Vazio ajsjasjaj
-    ;
 
-
-
+// Casos insensíveis
+   //Fragmentos
 fragment A
     : 'a'
     | 'A'
@@ -362,101 +274,18 @@ fragment Z
     | 'Z'
     ;
 
-
-//Casos-insensíveis
-
-DIV
-    : D I V
-    ;
-
-OR
-    : O R
-    ;
-
-AND
-    : A N D
-    ;
-
-NOT
-    : N O T
-    ;
-
-IF
-    : I F
-    ;
-
-THEN
-    : T H E N
-    ;
-
-ELSE
-    : E L S E
-    ;
-
-OF
-    : O F
-    ;
-
-WHILE
-    : W H I L E
-    ;
-
-DO
-    : D O
-    ;
-
-BEGIN
-    : B E G I N
-    ;
-
-END
-    : E N D
-    ;
-
-READ
-    : R E A D
-    ;
-
-WRITE
-    : W R I T E
-    ;
-
-VAR
-    : V A R
-    ;
-
-ARRAY
-    : A R R A Y
-    ;
-
-FUNCTION
-    : F U N C T I O N
-    ;
-
-PROCEDURE
-    : P R O C E D U R E
-    ;
-
-PROGRAM
-    : P R O G R A M
-    ;
-
-TRUE
-    : T R U E
-    ;
-
-FALSE
-    : F A L S E
-    ;
-
-CHAR
-    : C H A R
-    ;
-
-INTEGER
-    : I N T E G E R
-    ;
-
-BOOLEAN
-    : B O O L E A N
-    ;
+    //Terminais
+OR: O R ;
+DIV: D I V;
+AND: A N D;
+NOT: N O T;
+BEGIN: B E G I N;
+END: E N D;
+IF: I F;
+THEN: T H E N;
+ELSE: E L S E;
+WHILE: W H I L E;
+DO: D O;
+PROCEDURE: P R O C E D U R E;
+VAR: V A R;
+PROGRAM: P R O G R A M;
