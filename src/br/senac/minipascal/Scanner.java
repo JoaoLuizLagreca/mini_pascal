@@ -11,7 +11,7 @@ public class Scanner{
 		try{
 
             if(args.length<=0)
-                throw new Exception("Uso: Scan.jar <diretório do arquivo MiniPascal>");
+                throw new Exception("Uso: Scan.jar <Caminho do arquivo MiniPascal>");
 
             MiniPascalLexer lexer;
             MiniPascalParser parser;
