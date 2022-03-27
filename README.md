@@ -28,11 +28,13 @@ Nota: O projeto foi compilado no Manjaro, outras distribuições Arch linux pode
 ## Construir analisadores léxicos
 
 `./lexxerBuild.sh`
+
 Os códigos em java do analisador léxico estará em src/br/senac/minipascal/compiler/lexico/
 
 ## Compilar e empacotar em .JAR
 
 `./scanBuild`
+
 O programa será compilado e empacotado com o nome "Scan.jar" na raiz do projeto
 
 # Uso
