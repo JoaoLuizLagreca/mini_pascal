@@ -1,4 +1,4 @@
-PROGRAM OlaMundo;
+PROGRAM OlaMund;
 
 begin
     write("Olá Mundo!")
