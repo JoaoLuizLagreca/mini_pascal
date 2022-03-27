@@ -41,7 +41,7 @@ Os códigos em java do analisador léxico estará em src/br/senac/minipascal/com
 
 ## Compilar e empacotar em .JAR
 
-`./scanBuild`
+`./scanBuild.sh`
 
 O programa será compilado e empacotado com o nome "Scan.jar" na raiz do projeto
 
