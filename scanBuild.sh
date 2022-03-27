@@ -16,7 +16,6 @@ javac $javaFiles -d build && echo "Compilado com sucesso" >&0 || echo "Falha na 
 
 # Empacotar
 echo "Empacotando..."
-diretorios=$(ls build/)
 
 echo "Extraindo classes necessárias da livraria ANTRL4..."
 
@@ -26,6 +25,8 @@ unzip -qo $antlr_jar javax/* org/* -d build/ && sucesso=1 || sucesso=0
 if [ $sucesso -eq 0 ]; then
     echo "Erro ao extrair biblioteca" >&2
 else
+    diretorios=$(ls build/)
+
     cd build
     jar cfm ../Scan.jar ../src/manifest.txt $diretorios && echo "Empacotado com sucesso" >&0 || echo "Falha ao empacotar" >&2
 fi
