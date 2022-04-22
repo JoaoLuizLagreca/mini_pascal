@@ -280,17 +280,17 @@ fragment Z
     ;
 
     //Terminais
-OR: O R ;
-DIV: D I V;
-AND: A N D;
-NOT: N O T;
-BEGIN: B E G I N;
-END: E N D;
-IF: I F;
-THEN: T H E N;
-ELSE: E L S E;
-WHILE: W H I L E;
-DO: D O;
-PROCEDURE: P R O C E D U R E;
-VAR: V A R;
-PROGRAM: P R O G R A M;
+OR: WS O R;
+DIV: WS D I V;
+AND: WS A N D;
+NOT: WS N O T;
+BEGIN: WS B E G I N;
+END: WS E N D;
+IF: WS I F;
+THEN: WS T H E N;
+ELSE: WS E L S E;
+WHILE: WS W H I L E;
+DO: WS D O;
+PROCEDURE: WS P R O C E D U R E;
+VAR: WS V A R;
+PROGRAM: P R O G R A M WS;
