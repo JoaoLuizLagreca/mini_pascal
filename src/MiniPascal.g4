@@ -150,133 +150,107 @@ WS
 // Casos insensíveis
    //Fragmentos
 fragment A
-    : 'a'
-    | 'A'
+    : [aA]
     ;
 
 fragment B
-    : 'b'
-    | 'B'
+    : [bB]
     ;
 
 fragment C
-    : 'c'
-    | 'C'
+    : [cC]
     ;
 
 fragment D
-    : 'd'
-    | 'D'
+    : [dD]
     ;
 
 fragment E
-    : 'e'
-    | 'E'
+    : [eE]
     ;
 
 fragment F
-    : 'f'
-    | 'F'
+    : [fF]
     ;
 
 fragment G
-    : 'g'
-    | 'G'
+    : [gG]
     ;
 
 fragment H
-    : 'h'
-    | 'H'
+    : [hH]
     ;
 
 fragment I
-    : 'i'
-    | 'I'
+    : [iI]
     ;
 
 fragment J
-    : 'j'
-    | 'J'
+    : [jJ]
     ;
 
 fragment K
-    : 'k'
-    | 'K'
+    : [kK]
     ;
 
 fragment L
-    : 'l'
-    | 'L'
+    : [lL]
     ;
 
 fragment M
-    : 'm'
-    | 'M'
+    : [mM]
     ;
 
 fragment N
-    : 'n'
-    | 'N'
+    : [nN]
     ;
 
 fragment O
-    : 'o'
-    | 'O'
+    : [oO]
     ;
 
 fragment P
-    : 'p'
-    | 'P'
+    : [pP]
     ;
 
 fragment Q
-    : 'q'
-    | 'Q'
+    : [qQ]
     ;
 
 fragment R
-    : 'r'
-    | 'R'
+    : [rR]
     ;
 
 fragment S
-    : 's'
-    | 'S'
+    : [sS]
     ;
 
 fragment T
-    : 't'
-    | 'T'
+    : [tT]
     ;
 
 fragment U
-    : 'u'
-    | 'U'
+    : [uU]
     ;
 
 fragment V
-    : 'v'
-    | 'V'
+    : [vV]
     ;
 
 fragment W
-    : 'w'
-    | 'W'
+    : [wW]
     ;
 
 fragment X
-    : 'x'
-    | 'X'
+    : [xX]
     ;
 
 fragment Y
-    : 'y'
-    | 'Y'
+    : [yY]
     ;
 
 fragment Z
-    : 'z'
-    | 'Z'
+    : [zZ]
     ;
 
     //Terminais
