@@ -2,9 +2,9 @@
 ADO de Teoria da Computação e Compiladores na universidade SENAC
 
 # Tarefas
-☑Análise léxica
+✅Análise léxica
 
-❌Análise sintática
+🟠Análise sintática
 
 ❌Interpretador ou compilador
 
@@ -33,7 +33,7 @@ Gian Megiolaro
 - unzip
 
 # Build
-Nota: O projeto foi compilado no Manjaro, outras distribuições Arch linux podem funcionar, outros sistemas operacionais como Ubuntu, Debian, Windows, *BSDs podem precisar de modificações para compilar
+Nota: O projeto foi compilado no Manjaro, outras distribuições base Arch Linux podem funcionar, outros sistemas operacionais como Ubuntu, Debian, Windows, *BSDs podem precisar de modificações para compilar
 
 ## Compilação automática
 `./build.sh`
@@ -42,7 +42,7 @@ Nota: O projeto foi compilado no Manjaro, outras distribuições Arch linux pode
 
 `./lexxerBuild.sh`
 
-Os códigos em java do analisador léxico estará em src/br/senac/minipascal/compiler/lexico/
+Os códigos em Java do analisador léxico estará em src/br/senac/minipascal/compiler/lexico/
 
 ## Compilar e empacotar em .JAR
 
