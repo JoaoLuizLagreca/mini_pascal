@@ -1,0 +1,13 @@
+digito -> [0-9]
+letra -> _ | [aA-zZ]
+numero -> digito+
+identificador -> letra (letra|digito)*
+operador -> '*' | '+' | '-' | '/'
+relacao -> = | <> | < |<= | >= | >
+final -> ;
+reservado -> P R O G R A M | B E G I N | E N D | I F | T H E N | E L S E | W H I L E | D O | D I V | A N D | O R | N O T
+frase -> '\'' (QUALQUER_CARACTERE | '\\\'')* '\''
+
+comentario -> '{' (QUALQUER_CARACTERE)* '}' | '//' (QUALQUER_CARACTERE)* '\n'
+
+WS -> ' ' | '\r' | '\n' | '\t' | comentario
