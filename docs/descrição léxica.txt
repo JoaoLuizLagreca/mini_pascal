@@ -1,6 +1,6 @@
 digito -> [0-9]
 letra -> _ | [aA-zZ]
-numero -> digito+
+numero -> digito+ [. digito*]
 identificador -> letra (letra|digito)*
 operador -> '*' | '+' | '-' | '/'
 relacao -> = | <> | < |<= | >= | >
