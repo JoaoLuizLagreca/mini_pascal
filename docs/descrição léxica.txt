@@ -8,7 +8,7 @@ abert_comentario = '{' | '/'
 numero -> digito+ [. digito*]
 identificador -> letra (letra|digito)*
 
-reservado -> P R O G R A M | B E G I N | E N D | I F | T H E N | E L S E | W H I L E | D O | D I V | A N D | O R | N O T | V A R
+reservado -> P R O G R A M | B E G I N | E N D | I F | T H E N | T R U E | F A L S E | E L S E | W H I L E | D O | D I V | A N D | O R | N O T | V A R
 frase -> '\'' (QUALQUER_CARACTERE | '\\\'')* '\''
 
 comentario -> '{' (QUALQUER_CARACTERE)* '}' | '//' (QUALQUER_CARACTERE)* '\n'
