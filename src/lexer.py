@@ -1,333 +1,174 @@
 import sys
 sys.path.insert(0, 'lib')
 import reader
-from utils import isLetter
-from utils import arrayIndex
-from utils import isDigit
-from utils import throwError
-
-WS=[' ', '\t', '\r', '\n']
-
-def scan(code):
-    scanner = reader.scanner(code)
-    while not (scanner.isEOF()):
-        char = scanner.character()
-        print(str(scanner.index())+" "+char+" "+str(scanner.getState())) #debug
-
-        #FIXME: Adicionar simbolos especiais (revisão 2 do diagrama léxico)
-
-        if char.isalpha(): char = char.lower()
-
-        nextS=checkState(scanner, char)
-
-        scanner.setState(nextS)
-
-        scanner.next()
-
-__states=[
-    #0
-    [
-        ['o', 'd', 'a', 'n', 'b', 'e', 'i', 'w', 'p'],
-        [1,   3,   6,   9,   12,  17,  20,  25,  31]
-    ],
-
-    #1
-    [
-        ['r'],
-        [2]
-    ],
-
-    #2
-    [],
-
-    #3
-    [
-        ['i', 'o'],
-        [4,   30]
-    ],
-
-    #4
-    [
-        ['v'],
-        [5]
-    ],
-
-    #5
-    [],
-
-    #6
-    [
-        ['n'],
-        [7]
-    ],
-
-    #7
-    [
-        ['d'],
-        [8]
-    ],
-
-    #8
-    [],
-
-    #9
-    [
-        ['o'],
-        [10]
-    ],
-
-    #10
-    [
-        ['t'],
-        [11]
-    ],
-
-    #11
-    [],
-
-    #12
-    [
-        ['e'],
-        [13]
-    ],
-
-    #13
-    [
-        ['g'],
-        [14]
-    ],
-
-    #14
-    [
-        ['i'],
-        [15]
-    ],
-
-    #15
-    [
-        ['n'],
-        [16]
-    ],
-
-    #16
-    [],
-
-    #17
-    [
-        ['n', 'l'],
-        [18,  22]
-    ],
-
-    #18
-    [
-        ['d'],
-        [19]
-    ],
-
-    #19
-    [],
-
-    #20
-    [
-        ['f'],
-        [21]
-    ],
-
-    #21
-    [],
-
-    #22
-    [
-        ['s'],
-        [23]
-    ],
-
-    #23
-    [
-        ['e'],
-        [24]
-    ],
-
-    #24
-    [],
-
-    #25
-    [
-        ['h'],
-        [26]
-    ],
-
-    #26
-    [
-        ['i'],
-        [27]
-    ],
-
-    #27
-    [
-        ['l'],
-        [28]
-    ],
-
-    #28
-    [
-        ['e'],
-        [29]
-    ],
-
-    #29
-    [],
-
-    #30
-    [],
-
-    #31
-    [
-        ['r'],
-        [32]
-    ],
-
-    #32
-    [
-        ['o'],
-        [33]
-    ],
-
-    #33
-    [
-        ['c', 'g'],
-        [34,  40]
-    ],
-
-    #34
-    [
-        ['e'],
-        [35]
-    ],
-
-    #35
-    [
-        ['d'],
-        [36]
-    ],
-
-    #36
-    [
-        ['u'],
-        [37]
-    ],
-
-    #37
-    [
-        ['r'],
-        [38]
-    ],
-
-    #38
-    [
-        ['e'],
-        [39]
-    ],
-
-    #39
-    [],
-
-    #40
-    [
-        ['r'],
-        [41]
-    ],
-
-    #41
-    [
-        ['a'],
-        [42]
-    ],
-
-    #42
-    [
-        ['m'],
-        [43]
-    ],
-
-    #43
-    [],
-
-    #44
-    [
-        ['a'],
-        [45]
-    ],
-
-    #45
-    [
-        ['r'],
-        [46]
-    ],
-
-    #46
-    []
-
-]
-
-
-
-def checkState(scanner, char):
-    match scanner.getState():
-            case 0:
-                if char in WS: #WS -> skip
-                    return 0
-
-                i = arrayIndex(__states[0][0], char) #Analisa próximos estados no estado 0
-                if i>-1: return __states[0][1][i]
-
-                if isLetter(char): #É letra?
-                    return 47
-                if char.isnumeric(): #É número?
-                    return 48
-
-            case default:
-                return nonInitialState(scanner, char)
-
-def nonInitialState(scanner, char):
-    match scanner.getState():
-
-        case 47:
-                if isDigit(char):
-                    return 47
-
-        case 48:
-                if char.isnumeric():
-                    return 48
-
-                throwError(scanner)
-
-        case default:
-            if char in WS:
-                return register(scanner, char)
-            return tokenStates(scanner, char)
-
-    if char in WS:
-        return register(scanner, char)
-    if isDigit(char):
+import token
+import utils
+
+class Scanner:
+
+    def __init__(self, code):
+        self.code = code
+        self.pos = 0
+
+    def isEOF(self):
+        return pos>=len(code)
+
+    def __nextChar(self):
+        if isEOF: return '\0'
+        r = self.code[self.pos]
+        self.pos+=1
+        return r
+
+    def __back(self):
+        self.pos-=1
+
+    def nextToken(self):
+
+        if self.isEOF(): return None
+
+        state=0
+        cc = None
+        term=""
+        while True:
+            cc = self.__nextChar()
+
+            match state:
+                case 0:
+                    ts = __isState0FirstReserved(cc)
+                    if ts!=-1:
+                        state=ts
+                        term="".join((term, cc))
+                        break
+
+                    if utils.isWS(cc):
+                        state=0
+                        break
+                    if utils.isDigit(cc):
+                        state=1
+                        term="".join((term, cc))
+                        break
+                    if utils.isLetter(cc):
+                        state=2
+                        term="".join((term, cc))
+                        break
+                    if cc=='\'':
+                        state=3
+                        term="".join((term, cc))
+                        break
+                    if cc=='\\':
+                        state=6
+                        term="".join((term, cc))
+                        break
+                    if cc=='*' or cc=='+' or cc=='-':
+                        state=7
+                        term="".join((term, cc))
+                        break;
+                    if cc=='{':
+                        state=8
+                        term="".join((term, cc))
+                        break;
+
+                    raise LexicalException("Unrecognized SYMBOL")
+
+                    case 1:
+                        if utils.isDigit(cc) or cc='.':
+                            state=1
+                            term="".join((term, cc))
+                            break
+                        if utils.isWS(cc) or utils.isOperator(cc) or utils.isPontuation(cc) or utils.isCommentOpen(cc):
+                            __back()
+                            return token.Token(token.TK_NUMBER ,term)
+                        return LexicalException("Malformed NUMBER")
+
+                    case 2:
+                        if utils.isLetter(cc) or utils.isDigit(cc):
+                            state=2
+                            term="".join((term, cc))
+                        if utils.isOperator(cc) or utils.isRelation(cc) or utils.isCommentOpen(cc):
+                            __back()
+                            return token.Token(token.TK_IDENTIFIER, term)
+                        return LexicalException("Malformed IDENTIFIER")
+
+                    case 3:
+                        if cc='\'':
+                            state=4
+                            term="".join((term, cc))
+                            break
+                        if cc=='\\':
+                            state=5
+                            term="".join((term, cc))
+                            break
+                        term="".join((term, cc))
+                        state=3
+                        break
+
+                    case 4:
+                        __back()
+                        return token.Token(token.TK_STRING, term)
+
+                    case 5:
+                        if cc=='\'' or utils.isLetter(cc):
+                            state=3
+                            term="".join((term, cc))
+                            break
+                        return LexicalException("Unrecognized char command")
+
+                    case 6:
+                        if cc=='/':
+                            state=9
+                            break
+                        __back()
+                        return token.Token(token.TK_OPERATOR, term)
+
+                    case 7:
+                        __back()
+                        return token.Token(token.TK_OPERATOR, term)
+
+                    case 8:
+                        if cc=='}':
+                            state=9
+                            term="".join((term, cc))
+                            break
+                        state=8
+                        term="".join((term, cc))
+                        break
+
+                    case 9:
+                        __back()
+                        return nextToken() # Comentários devem ser desconsiderados
+
+                    # TODO: Reservados
+
+
+
+
+def __isState0FirstReserved(char):
+    cc = char.lower()
+    if cc=='v':
+        return 59
+    if cc=='p':
+        return 10
+    if cc=='b':
+        return 17
+    if cc=='e':
+        return 22
+    if cc=='i':
+        return 28
+    if cc=='t':
+        return 30
+    if cc=='f':
+        return 37
+    if cc=='w':
+        return 42
+    if cc=='d':
         return 47
+    if cc=='a':
+        return 51
+    if cc=='o':
+        return 54
+    if cc=='n':
+        return 56
 
-def tokenStates(scanner, char):
+    return -1
 
-    if char in WS:
-        return register(scanner, char)
-
-    if scanner.getState()<len(__states) and len(__states[scanner.getState()]) > 0:
-        i=arrayIndex(__states[scanner.getState()][0], char)
-        if i>-1: return __states[scanner.getState()][1][i]
-
-    if isDigit(char):
-        return 47
-
-
-
-    throwError(scanner)
-
-def register(scanner, char):
-    #TODO: Implementar registrador
-    return 0
+class LexicalException(Exception):

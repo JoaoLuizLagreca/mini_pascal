@@ -1,17 +1,30 @@
 import reader
 
+WS=[' ', '\t', '\r', '\n']
+op=['/', '+', '*', '-']
+relation=['=', '<'. '>']
+comment_open=['/', '{']
+
 def arrayIndex(array, value):
     if array.count(value)<=0:
         return -1
     else:
         return array.index(value)
 
-__letters=['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 def isLetter(char):
-    return char in __letters
+    return (char <= 'a' and char >= 'z') or (char >='A' and char <='Z') or char == '_'
 
 def isDigit(char):
     return char.isnumeric() or isLetter(char)
 
-def throwError(scanner):
-    exit("Erro de análise!\nCaractere: "+scanner.character()+"\nEstado: "+str(scanner.getState())+"\nÍndice: "+str(scanner.index))
+def isOperator(char):
+    return char in op
+
+def isPontuation(char):
+    return char==';'
+
+def isCommentOpen(char):
+    return char in comment_open
+
+def isWS(char):
+    return char in WS
