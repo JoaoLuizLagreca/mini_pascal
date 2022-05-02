@@ -150,7 +150,7 @@ class Scanner:
 
                 case 9:
                     self.__back()
-                    return nextToken() # Comentários devem ser desconsiderados
+                    return self.nextToken() # Comentários devem ser desconsiderados
 
                 case 62:
                     self.__back()
