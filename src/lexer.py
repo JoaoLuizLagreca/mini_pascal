@@ -31,7 +31,7 @@ class Scanner:
         term=""
         while True:
             cc = self.__nextChar()
-            #print(str(state)+": "+cc)  #DEPURAR ENTRADAS
+            print(str(state)+": "+cc)  #DEPURAR ENTRADAS
 
             match state:
                 case 0:
@@ -205,6 +205,38 @@ class Scanner:
         lc = args[0].lower()
         cc = args[0]
         match args[1]:
+            case 10:
+                if lc=='r':
+                    args[1]=11
+                    args[2]="".join((args[2], cc))
+                    return None
+            case 11:
+                if lc=='o':
+                    args[1]==12
+                    args[2]="".join((args[2], cc))
+                    return None
+            case 12:
+                if lc=='g':
+                    args[1]=13
+                    args[2]="".join((args[2], cc))
+                    return None
+            case 13:
+                if lc=='r':
+                    args[1]=14
+                    args[2]="".join((args[2], cc))
+                    return None
+            case 14:
+                if lc=='a':
+                    args[1]=15
+                    args[2]="".join((args[2], cc))
+                    return None
+            case 15:
+                if lc=='m':
+                    args[1]=16
+                    args[2]="".join((args[2], cc))
+                    return None
+            case 16:
+                return self.__lastReserved(args, token.TL_PROGRAM)
             case 17:
                 if lc=='e':
                     args[1]=18
