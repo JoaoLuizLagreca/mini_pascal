@@ -56,7 +56,7 @@ class Scanner:
                         state=3
                         term="".join((term, cc))
                         continue
-                    if cc=='\\':
+                    if cc=='/':
                         state=6
                         term="".join((term, cc))
                         continue
@@ -130,7 +130,7 @@ class Scanner:
 
                 case 6:
                     if cc=='/':
-                        state=9
+                        state=64
                         continue
                     self.__back()
                     return token.Token(token.TK_OPERATOR, term)
@@ -159,6 +159,12 @@ class Scanner:
                 case 63:
                     self.__back()
                     return token.Token(token.TK_SYMBOL, term)
+
+                case 64:
+                    if cc=='\n' or cc=='\x00':
+                        self.__back()
+                        return self.nextToken() # Comentários devem ser desconsiderados
+                    continue
 
                 case default:
                     args=[cc, state, term]
