@@ -399,7 +399,7 @@ class Scanner:
                     args[2]="".join((args[2], cc))
                     return None
             case 61:
-                return self.__lastReserved(args, token.TK_VAT)
+                return self.__lastReserved(args, token.TK_VAR)
 
 
             case default:
