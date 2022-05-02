@@ -212,7 +212,7 @@ class Scanner:
                     return None
             case 11:
                 if lc=='o':
-                    args[1]==12
+                    args[1]=12
                     args[2]="".join((args[2], cc))
                     return None
             case 12:
@@ -236,7 +236,7 @@ class Scanner:
                     args[2]="".join((args[2], cc))
                     return None
             case 16:
-                return self.__lastReserved(args, token.TL_PROGRAM)
+                return self.__lastReserved(args, token.TK_PROGRAM)
             case 17:
                 if lc=='e':
                     args[1]=18
