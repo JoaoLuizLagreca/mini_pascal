@@ -4,6 +4,8 @@ WS=[' ', '\t', '\r', '\n']
 op=['/', '+', '*', '-']
 relation=['=', '<', '>']
 comment_open=['/', '{']
+symbols=['(' , ')', '[', ']']
+pontuation=['.', ';']
 
 def arrayIndex(array, value):
     if array.count(value)<=0:
@@ -28,6 +30,12 @@ def isRelation(char):
 
 def isCommentOpen(char):
     return char in comment_open
+
+def isSymbol(char):
+    return char in symbols
+
+def isPontuation(char):
+    return char in pontuation
 
 def isWS(char):
     return char in WS

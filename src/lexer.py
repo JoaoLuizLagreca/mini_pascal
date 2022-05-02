@@ -31,7 +31,7 @@ class Scanner:
         term=""
         while True:
             cc = self.__nextChar()
-            print(state)
+            # print(str(state)+": "+cc)  #DEPURAR ENTRADAS
 
             match state:
                 case 0:
@@ -69,6 +69,16 @@ class Scanner:
                         term="".join((term, cc))
                         continue;
 
+                    if utils.isPontuation(cc):
+                        state=62
+                        term="".join((term, cc))
+                        continue
+
+                    if utils.isSymbol(cc):
+                        state=63
+                        term="".join((term, cc))
+                        continue
+
                     if cc=='\x00': #EOF
                         return None
 
@@ -79,7 +89,7 @@ class Scanner:
                         state=1
                         term="".join((term, cc))
                         continue
-                    if utils.isWS(cc) or utils.isOperator(cc) or utils.isPontuation(cc) or utils.isCommentOpen(cc):
+                    if cc=='\x00' or utils.isSymbol(cc) or utils.isPontuation(cc) or utils.isWS(cc) or utils.isOperator(cc) or utils.isPontuation(cc) or utils.isCommentOpen(cc):
                         self.__back()
                         return token.Token(token.TK_NUMBER ,term)
                     raise LexicalException("Malformed NUMBER")
@@ -89,7 +99,7 @@ class Scanner:
                         state=2
                         term="".join((term, cc))
                         continue
-                    if utils.isOperator(cc) or utils.isRelation(cc) or utils.isCommentOpen(cc) or utils.isWS(cc):
+                    if cc=='\x00' or utils.isSymbol(cc) or utils.isPontuation(cc) or utils.isOperator(cc) or utils.isRelation(cc) or utils.isCommentOpen(cc) or utils.isWS(cc):
                         self.__back()
                         return token.Token(token.TK_IDENTIFIER, term)
                     raise LexicalException("Malformed IDENTIFIER")
@@ -142,9 +152,18 @@ class Scanner:
                     self.__back()
                     return nextToken() # Comentários devem ser desconsiderados
 
+                case 62:
+                    self.__back()
+                    return token.Token(token.TK_PONTUATION, term)
+
+                case 63:
+                    self.__back()
+                    return token.Token(token.TK_SYMBOL, term)
+
+                case default:
+                    raise LexicalException("Generic Error!")
+
                 # TODO: Reservados
-
-
 
 
     def __isState0FirstReserved(self, char):
@@ -175,6 +194,8 @@ class Scanner:
             return 56
 
         return -1
+
+    #def __reservedStates(self, cc, state,
 
 class LexicalException(Exception):
     def __init__(self, *args):
