@@ -31,7 +31,7 @@ class Scanner:
         term=""
         while True:
             cc = self.__nextChar()
-            print(str(state)+": "+cc)  #DEPURAR ENTRADAS
+            #print(str(state)+": "+cc)  #DEPURAR ENTRADAS
 
             match state:
                 case 0:
