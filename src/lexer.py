@@ -78,7 +78,7 @@ class Scanner:
                         if utils.isWS(cc) or utils.isOperator(cc) or utils.isPontuation(cc) or utils.isCommentOpen(cc):
                             __back()
                             return token.Token(token.TK_NUMBER ,term)
-                        return LexicalException("Malformed NUMBER")
+                        raise LexicalException("Malformed NUMBER")
 
                     case 2:
                         if utils.isLetter(cc) or utils.isDigit(cc):
@@ -87,7 +87,7 @@ class Scanner:
                         if utils.isOperator(cc) or utils.isRelation(cc) or utils.isCommentOpen(cc):
                             __back()
                             return token.Token(token.TK_IDENTIFIER, term)
-                        return LexicalException("Malformed IDENTIFIER")
+                        raise LexicalException("Malformed IDENTIFIER")
 
                     case 3:
                         if cc='\'':
@@ -111,7 +111,7 @@ class Scanner:
                             state=3
                             term="".join((term, cc))
                             break
-                        return LexicalException("Unrecognized char command")
+                        raise LexicalException("Unrecognized char command")
 
                     case 6:
                         if cc=='/':
