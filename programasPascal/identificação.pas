@@ -1,3 +1,4 @@
+begin
 123
 cbc123
-rrite('Frase com \'aspas\'')
+write('Frase com \'aspas\'')
