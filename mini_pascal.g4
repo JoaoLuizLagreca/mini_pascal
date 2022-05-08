@@ -39,4 +39,8 @@ WS:
 	[ \t\r\n] -> skip;
 
 numero: Digito (Digito | '.')*;
+
+identificador: Letra (Letra | Digito)*;
+
+
 	
