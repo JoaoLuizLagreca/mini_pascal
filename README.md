@@ -2,9 +2,9 @@
 ADO de Teoria da Computação e Compiladores na universidade SENAC
 
 # Tarefas
-✅Análise léxica
+🟠Análise léxica
 
-🟠Análise sintática
+❌Análise sintática
 
 ❌Interpretador ou compilador
 
@@ -23,7 +23,7 @@ ADO de Teoria da Computação e Compiladores na universidade SENAC
 
 [@josoarespir5](https://github.com/josoarespir5)
 
-Gian Megiolaro
+[@Megiolaro](https://github.com/Megiolaro)
 
 [@JoaoLuizLagreca](https://github.com/JoaoLuizLagreca)
 
@@ -33,22 +33,16 @@ Gian Megiolaro
 - unzip
 
 # Build
-Nota: O projeto foi compilado no Manjaro, outras distribuições base Arch Linux podem funcionar, outros sistemas operacionais como Ubuntu, Debian, Windows, *BSDs podem precisar de modificações para compilar
+## GNU/Linux
+Nota: O projeto foi compilado no Manjaro, outras distribuições podem precisar de adaptações para compilar
 
-## Compilação automática
 `./build.sh`
 
-## Construir analisadores léxicos
+O programa será empacotado como "MiniPascal.jar" na raiz
 
-`./lexxerBuild.sh`
 
-Os códigos em Java do analisador léxico estará em src/br/senac/minipascal/compiler/lexico/
-
-## Compilar e empacotar em .JAR
-
-`./scanBuild.sh`
-
-O programa será compilado e empacotado com o nome "Scan.jar" na raiz do projeto
+## Windows
+Ainda não suportado
 
 # Uso
-`java -jar Scan.jar <caminho do código MiniPascal>`
+`java -jar MiniPascal.jar <caminho do código MiniPascal>`
