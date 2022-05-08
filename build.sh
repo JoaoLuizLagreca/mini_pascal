@@ -15,3 +15,9 @@ antlr4 $descricao -package br.senac.minipascal.antlr -o $diretorio_antlr || exit
 javaFiles=$(find src -name "*.java")
 mkdir -p build
 javac $javaFiles -d build || exit $?
+
+#Empacotar
+unzip -qo /usr/share/java/antlr-complete.jar javax/* org/* -d build/ || exit $?
+diretorios=$(ls build/)
+cd build
+jar cfm ../MiniPascal.jar ../src/manifest.txt $diretorios || exit $?
