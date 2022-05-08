@@ -1,5 +1,7 @@
-letra: 
-	'_' 
+grammar mini_pascal;
+
+Letra:
+	'_'
 	| 'a' | 'A'
 	| 'b' | 'B'
 	| 'c' | 'C'
@@ -27,14 +29,14 @@ letra:
 	| 'y' | 'Y'
 	| 'z' | 'Z';
 
-digito:
-	0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
+Digito:
+	[0-9] ;
 
-operador:
+Operador:
 	'*' | '+' | '-' | '/';
 
 WS:
 	[ \t\r\n] -> skip;
 
-Numero: digito (digito | '.')*
+numero: Digito (Digito | '.')*;
 	
