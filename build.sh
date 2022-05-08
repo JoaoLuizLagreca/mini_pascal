@@ -5,11 +5,11 @@ diretorio_antlr="src/br/senac/minipascal/antlr/" #Localização do diretório do
 
 
 #Importar biblioteca
-export CLASSPATH=".:/usr/share/java/antlr-complete.jar:$CLASSPATH"
+export CLASSPATH="src:/usr/share/java/antlr-complete.jar:$CLASSPATH"
 
 #Gerar arquivos Java
 mkdir -p $diretorio_antlr
-antlr4 $descricao -o $diretorio_antlr || exit $?
+antlr4 $descricao -package br.senac.minipascal.antlr -o $diretorio_antlr || exit $?
 
 #Compilar arquivos
 javaFiles=$(find src -name "*.java")
