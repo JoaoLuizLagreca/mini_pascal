@@ -36,5 +36,5 @@ operador:
 WS:
 	[ \t\r\n] -> skip;
 
-
+Numero: digito (digito | '.')*
 	
