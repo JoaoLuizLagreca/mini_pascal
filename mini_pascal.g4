@@ -51,3 +51,31 @@ simbolos: '(' | ')' | '[' | ']';
 pontuacao: ';' | '.';
 
 PROGRAM: [Pp] [Rr] [Oo] [Gg] [Rr] [Aa] [Mm] ;
+
+BEGIN: [Bb] [Ee] [Gg] [Ii] [Nn] ;
+
+END: [Ee] [Nn] [Dd] ;
+
+IF: [Ii] [Ff] ;
+
+THEN: [Tt] [Hh] [Ee] [Nn] ;
+
+TRUE: [Tt] [Rr] [Uu] [Ee] ;
+
+FALSE: [Ff] [Aa] [Ll] [Ss] [Ee] ;
+
+ELSE: [Ee] [Ll] [Ss] [Ee] ;
+
+WHILE: [Ww] [Hh] [Ii] [Ll] [Ee] ;
+
+DO: [Dd] [Oo] ;
+
+DIV: [Dd] [Ii] [Vv] ; 
+
+AND: [Aa] [Nn] [Dd] ;
+
+OR: [Oo] [Rr] ;
+
+NOT: [Nn] [Oo] [Tt] ;
+
+VAR: [Vv] [Aa] [Rr] ;
