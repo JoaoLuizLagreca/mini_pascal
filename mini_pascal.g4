@@ -16,7 +16,7 @@ comando: atribuicao | chamProc | comComp | comCond | comRep ;
 chamProc: identificador ('(' listaExpress ')' )? ;
 comComp: BEGIN comando (';' comando)* END ;
 comCond: IF expressao THEN comando (ELSE comando)? ;
-comRep: WHILE expressao DO comando ;
+comRep: WHILE expressao DO comComp ;
 
 
 identificador: Identificador ;
