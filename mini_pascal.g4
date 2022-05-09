@@ -4,8 +4,11 @@ options {
 	caseInsensitive = true;
 }
 
-//TODO: Regras Sintáticas
+//Regras sintáticas
 
+
+
+//Gramáticas
 
 PROGRAM: 'program' ;
 BEGIN: 'begin' ;
