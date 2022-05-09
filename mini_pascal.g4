@@ -30,13 +30,15 @@ atribuicao: variavel ':=' expressao ;
 variavel: identificador
 	| identificador expressao? ;
 expressao: expressaoSimp (relacao expressaoSimp)? ;
-expressaoSimp: ('+' | '-')? termo (('+' | '-' | OR) termo )* ;
+expressaoSimp:
+	('+' | '-')? termo (('+' | '-' | OR) termo )* ;
 termo: fator (('*' | DIV | AND) fator )* ;
 fator:
 	variavel
 	| Frase
 	| numero
 	| '(' expressao ')'
+	| truefalse
 	| NOT fator ;
 
 numero: Numero ;
@@ -47,6 +49,7 @@ relacao:
 	| '<='
 	| '>='
 	| '>' ;
+truefalse: TRUE | FALSE ;
 
 //Gramáticas
 
