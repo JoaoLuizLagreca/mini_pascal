@@ -1,6 +1,24 @@
 grammar mini_pascal;
 
-Letra:
+//TODO: Regras Sintáticas
+
+PROGRAM: [Pp] [Rr] [Oo] [Gg] [Rr] [Aa] [Mm] ;
+BEGIN: [Bb] [Ee] [Gg] [Ii] [Nn] ;
+END: [Ee] [Nn] [Dd] ;
+IF: [Ii] [Ff] ;
+THEN: [Tt] [Hh] [Ee] [Nn] ;
+TRUE: [Tt] [Rr] [Uu] [Ee] ;
+FALSE: [Ff] [Aa] [Ll] [Ss] [Ee] ;
+ELSE: [Ee] [Ll] [Ss] [Ee] ;
+WHILE: [Ww] [Hh] [Ii] [Ll] [Ee] ;
+DO: [Dd] [Oo] ;
+DIV: [Dd] [Ii] [Vv] ; 
+AND: [Aa] [Nn] [Dd] ;
+OR: [Oo] [Rr] ;
+NOT: [Nn] [Oo] [Tt] ;
+VAR: [Vv] [Aa] [Rr] ;
+
+fragment Letra:
 	'_'
 	| 'a' | 'A'
 	| 'b' | 'B'
@@ -29,53 +47,23 @@ Letra:
 	| 'y' | 'Y'
 	| 'z' | 'Z';
 
-Digito:
+fragment Digito:
 	[0-9] ;
 
-Operador:
+fragment Operador:
 	'*' | '+' | '-' | '/';
 
 WS:
 	[ \t\r\n] -> skip;
 
-numero: Digito (Digito | '.')*;
+Numero: Digito (Digito | '.')*;
 
-identificador: Letra (Letra | Digito)*;
+Identificador: Letra (Letra | Digito)*;
 
-frase: '\'' ~[<']* '\'';
+Frase: '\'' ~[<']* '\'';
 
-comentario: '//' ~('\r' | '\n')*;
+Comentario: '//' ~('\r' | '\n')*;
 
-simbolos: '(' | ')' | '[' | ']';
+fragment Simbolos: '(' | ')' | '[' | ']';
 
-pontuacao: ';' | '.';
-
-PROGRAM: [Pp] [Rr] [Oo] [Gg] [Rr] [Aa] [Mm] ;
-
-BEGIN: [Bb] [Ee] [Gg] [Ii] [Nn] ;
-
-END: [Ee] [Nn] [Dd] ;
-
-IF: [Ii] [Ff] ;
-
-THEN: [Tt] [Hh] [Ee] [Nn] ;
-
-TRUE: [Tt] [Rr] [Uu] [Ee] ;
-
-FALSE: [Ff] [Aa] [Ll] [Ss] [Ee] ;
-
-ELSE: [Ee] [Ll] [Ss] [Ee] ;
-
-WHILE: [Ww] [Hh] [Ii] [Ll] [Ee] ;
-
-DO: [Dd] [Oo] ;
-
-DIV: [Dd] [Ii] [Vv] ; 
-
-AND: [Aa] [Nn] [Dd] ;
-
-OR: [Oo] [Rr] ;
-
-NOT: [Nn] [Oo] [Tt] ;
-
-VAR: [Vv] [Aa] [Rr] ;
+fragment Pontuacao: ';' | '.';
