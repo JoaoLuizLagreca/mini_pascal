@@ -42,7 +42,7 @@ Identificador: Letra (Letra | Digito)*;
 
 Frase: '\'' ~[<']* '\'';
 
-Comentario: '//' ~('\r' | '\n')*;
+Comentario: '//' ~('\r' | '\n')*; //TODO: Comentário multi-linha
 
 fragment Simbolos: '(' | ')' | '[' | ']';
 
