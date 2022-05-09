@@ -50,5 +50,4 @@ simbolos: '(' | ')' | '[' | ']';
 
 pontuacao: ';' | '.';
 
-
-	
+PROGRAM: [Pp] [Rr] [Oo] [Gg] [Rr] [Aa] [Mm] ;
