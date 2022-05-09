@@ -41,7 +41,7 @@ public class Scanner{
 
             parser.addErrorListener(errorL);
             parser.addParseListener(treeL);
-            //parser.programa(); //TODO: Iniciar a implementação da descrição sintática
+            parser.programa(); //TODO: Iniciar a implementação da descrição sintática
 
             if(!errorL.isError())
                 System.out.println("Análise léxica com sucesso!");
