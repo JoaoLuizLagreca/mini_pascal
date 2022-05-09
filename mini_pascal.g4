@@ -42,5 +42,13 @@ numero: Digito (Digito | '.')*;
 
 identificador: Letra (Letra | Digito)*;
 
+frase: '\'' ~[<']* '\'';
+
+comentario: '//' ~('\r' | '\n')*;
+
+simbolos: '(' | ')' | '[' | ']';
+
+pontuacao: ';' | '.';
+
 
 	
