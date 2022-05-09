@@ -2,4 +2,3 @@ Manifest-Version: 1.0
 Implementation-Title: MiniPascal Scanner
 Implementation-Version: 1.0
 Main-Class: br.senac.minipascal.Scanner
-

@@ -1,8 +1,8 @@
 package br.senac.minipascal;
 
 import java.util.BitSet;
-import br.senac.minipascal.compiler.lexico.MiniPascalLexer;
-import br.senac.minipascal.compiler.lexico.MiniPascalParser;
+import br.senac.minipascal.antlr.mini_pascalLexer;
+import br.senac.minipascal.antlr.mini_pascalParser;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.ANTLRErrorListener;
@@ -23,25 +23,25 @@ public class Scanner{
 		try{
 
             if(args.length<=0)
-                throw new Exception("Uso: Scan.jar <Caminho do arquivo MiniPascal>");
+                throw new Exception("Uso: MiniPascal.jar <Caminho do arquivo MiniPascal>");
 
-            MiniPascalLexer lexer;
-            MiniPascalParser parser;
+            mini_pascalLexer lexer;
+            mini_pascalParser parser;
             //Ler o arquivo "Nome do arquivo" sendo entrada para o analisador lexico
-            lexer = new MiniPascalLexer(CharStreams.fromFileName(args[0]));
+            lexer = new mini_pascalLexer(CharStreams.fromFileName(args[0]));
 
             //cria-se um fluxo de tokens para passar para o parser
             CommonTokenStream tokenStream = new CommonTokenStream(lexer);
 
             //cria-se o parser a partir do tokenStream
-            parser = new MiniPascalParser(tokenStream);
+            parser = new mini_pascalParser(tokenStream);
 
             ErrorListener errorL = new ErrorListener();
             TreeListener treeL = new TreeListener();
 
             parser.addErrorListener(errorL);
             parser.addParseListener(treeL);
-            parser.programa();
+            //parser.programa(); //TODO: Iniciar a implementação da descrição sintática
 
             if(!errorL.isError())
                 System.out.println("Análise léxica com sucesso!");
