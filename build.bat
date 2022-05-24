@@ -26,7 +26,7 @@ set CLASSPATH_OLD=%CLASSPATH%
 set CLASSPATH=src;libs/antlr-complete.jar;%CLASSPATH%
 
 rem Gerar arquivos Java
-%JAVAEXE-LOCATION% org.antlr.v4.Tool %descricao% -package br.senac.minipascal.antlr -o %diretorio_antlr%
+%JAVAEXE_LOCATION% org.antlr.v4.Tool %descricao% -package br.senac.minipascal.antlr -o %diretorio_antlr%
 if errorlevel 1 goto final
 
 
