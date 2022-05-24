@@ -16,7 +16,7 @@ set diretorio_antlr="src\br\senac\minipascal\antlr\"
 
 
 if not exist "%JAVAEXE_LOCATION%" (
-    echo Voce precisa baixar e extrair o OpenJDK 11 ou superior en um diretorio valido. Especifique a localizacao na variavel %%JAVAEXE_LOCATION%%
+    echo Voce precisa baixar e extrair o OpenJDK 11 ou superior em um diretorio valido. Especifique a localizacao na variavel %%JAVAEXE_LOCATION%%
     echo Voce pode baixar por aqui: https://openjdk.java.net/
     exit /b 1
 )
