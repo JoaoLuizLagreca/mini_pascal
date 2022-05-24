@@ -3,7 +3,7 @@
 rem Configuração pré-build
 
 rem Localização do java.exe versão 11 para cima
-set JAVAEXE_LOCATION=%USERPROFILE%\Documents\jdk-18.0.1.1\bin\
+set JAVAEXE_LOCATION=%USERPROFILE%\Documents\jdk-18.0.1.1\
 
 rem Localização do arquivo de descrição do ANTLR
 set descricao=mini_pascal.g4
@@ -29,7 +29,7 @@ set CLASSPATH=src;%ANTLR_LIB%;%CLASSPATH%
 
 rem Gerar arquivos Java
 echo Gerando analisadores com o ANTLR4...
-%JAVAEXE_LOCATION%\java.exe org.antlr.v4.Tool %descricao% -package br.senac.minipascal.antlr -o %diretorio_antlr%
+%JAVAEXE_LOCATION%\bin\java.exe org.antlr.v4.Tool %descricao% -package br.senac.minipascal.antlr -o %diretorio_antlr%
 if errorlevel 1 goto error
 
 rem Compilar arquivos
@@ -38,7 +38,7 @@ Setlocal EnableDelayedExpansion
 for /F %%a in ('forfiles /S /M *.java /P src /C "cmd /c echo @path" ') do (
 set ARQ_JAVA=%%a !ARQ_JAVA!
 )
-%JAVAEXE_LOCATION%\javac.exe %ARQ_JAVA% -d build
+%JAVAEXE_LOCATION%\bin\javac.exe %ARQ_JAVA% -d build
 if errorlevel 1 goto error
 
 rem Empacotar
@@ -52,7 +52,7 @@ for /F %%a in ('dir /Ad /b temp') do (
 set DIRETORIOS=%%a !DIRETORIOS!
 )
 cd temp
-%JAVAEXE_LOCATION%\jar.exe cfm ../MiniPascal.jar ../src/manifest.txt %DIRETORIOS%
+%JAVAEXE_LOCATION%\bin\jar.exe cfm ../MiniPascal.jar ../src/manifest.txt %DIRETORIOS%
 if errorlevel 1 goto apagar_temp
 cd ..
 rmdir /S /Q temp
