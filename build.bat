@@ -1,7 +1,7 @@
 @echo off
 
 rem Localização do java.exe versão 11 para cima
-set JAVAEXE_LOCATION=%USEPROFILE%\Documents\jdk-18.0.1.1\bin\java.exe
+set JAVAEXE_LOCATION=%USERPROFILE%\Documents\jdk-18.0.1.1\bin\java.exe
 
 rem Localização do arquivo de descrição do ANTLR
 set descricao=mini_pascal.g4
