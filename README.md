@@ -28,9 +28,14 @@ ADO de Teoria da Computação e Compiladores na universidade SENAC
 [@JoaoLuizLagreca](https://github.com/JoaoLuizLagreca)
 
 # Dependências
+## GNU/LINUX
 - ANTLR4
 - OpenJDK
 - unzip
+
+## Windows
+- OpenJDK: https://openjdk.java.net/
+- 7zip: https://www.7-zip.org/
 
 # Build
 ## GNU/Linux
@@ -42,7 +47,17 @@ O programa será empacotado como "MiniPascal.jar" na raiz
 
 
 ## Windows
-Ainda não suportado
+Instale as dependências
+
+Extraia o OpenJDK em algum lugar, baixe-o por aqui: https://openjdk.java.net/
+
+Abra o build.bat e modifique a variável JAVAEXE_LOCATION com a localização da onde você extraiu o OpenJDK
+
+Abra o CMD no diretório do projeto e execute:
+
+`build.bat`
+
+O programa será empacotado como "MiniPascal.jar" na raiz
 
 # Uso
 `java -jar MiniPascal.jar <caminho do código MiniPascal>`
