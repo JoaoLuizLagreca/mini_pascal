@@ -27,10 +27,12 @@ set CLASSPATH_OLD=%CLASSPATH%
 set CLASSPATH=src;%ANTLR_LIB%;%CLASSPATH%
 
 rem Gerar arquivos Java
+echo Gerando analisadores com o ANTLR4...
 %JAVAEXE_LOCATION%\java.exe org.antlr.v4.Tool %descricao% -package br.senac.minipascal.antlr -o %diretorio_antlr%
 if errorlevel 1 goto final
 
 rem Compilar arquivos
+echo Compilando...
 Setlocal EnableDelayedExpansion
 for /F %%a in ('forfiles /S /M *.java /P src /C "cmd /c echo @path" ') do (
 set ARQ_JAVA=%%a !ARQ_JAVA!
@@ -39,6 +41,7 @@ set ARQ_JAVA=%%a !ARQ_JAVA!
 if errorlevel 1 goto final
 
 rem Empacotar
+echo Empacotando...
 mkdir temp
 7z x %ANTLR_LIB% -otemp javax/* org/* -r -y > nul
 robocopy /S /E build\ temp\ > nul
@@ -51,6 +54,9 @@ cd temp
 if errorlevel 1 goto apagar_temp
 cd ..
 rmdir /S /Q temp
+echo Build finalizada!
+
+echo Voce encontrara o arquivo como "MiniPascal.jar"
 
 :final
 rem Redefinir variáveis de ambiente
