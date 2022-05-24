@@ -8,7 +8,7 @@ set JAVAEXE_LOCATION=%USERPROFILE%\Documents\jdk-18.0.1.1\bin\java.exe
 rem Localização do arquivo de descrição do ANTLR
 set descricao=mini_pascal.g4
 rem Localização do diretório do analisador .java gerado pelo ANTLR
-set diretorio_antlr="src\br\senac\minipascal\antlr\"
+set diretorio_antlr=src\br\senac\minipascal\antlr\
 
 
 
