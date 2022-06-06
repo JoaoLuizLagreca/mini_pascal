@@ -2,11 +2,11 @@
 ADO de Teoria da Computação e Compiladores na universidade SENAC
 
 # Tarefas
-☑Análise léxica
+✅Análise léxica
 
-☑Análise sintática
+✅Análise sintática
 
-❌Interpretador ou compilador
+🟠Análise semântica
 
 ## Legenda
 
