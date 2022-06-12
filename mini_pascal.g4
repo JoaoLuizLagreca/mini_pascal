@@ -4,6 +4,10 @@ options {
 	caseInsensitive = true;
 }
 
+@header{
+	import br.senac.minipascal.structure.MiniPascalVariable;
+}
+
 //Regras sintáticas
 programa: PROGRAM identificador ';' bloco '.' ;
 bloco: parDeclVar? parDeclSubRot comComp ;
