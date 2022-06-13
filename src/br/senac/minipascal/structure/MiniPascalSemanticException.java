@@ -1,4 +1,4 @@
- package sr.senac.minipascal.structure;
+ package br.senac.minipascal.structure;
 
  public class MiniPascalSemanticException extends RuntimeException{
 
