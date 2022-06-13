@@ -12,6 +12,7 @@ options {
 
 @parser::members{
 	byte ultimoTipo;
+	MiniPascalVariable ultimaVar;
 	Hashtable<String, MiniPascalSymbol> symbols = new Hashtable();
 
 	void adicionarVariavel(Token tk){
@@ -49,7 +50,8 @@ listaExpress: expressao (',' expressao)* ;
 declProc: PROCEDURE identificador paramForm? ';' bloco ;
 paramForm: '(' secParamForm (';' secParamForm)* ')' ;
 secParamForm: VAR listaIdent ':' identificador ;
-atribuicao: variavel ':=' expressao ;
+atribuicao: varAtribuicao ':=' expressao ;
+varAtribuicao: identificador;
 variavel: identificador
 	| identificador expressao? ;
 expressao: expressaoSimp (relacao expressaoSimp)? ;
