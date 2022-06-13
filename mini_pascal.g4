@@ -63,8 +63,8 @@ expressao: expressaoSimp (relacao expressaoSimp {
 }
 )? ;
 expressaoSimp:
-	('+' | '-')? termo (('+' | '-' | OR) termo )* ;
-termo: fator (('*' | DIV | AND) fator )* ;
+	('+' | '-')? termo (('+' | '-' | OR | '*' | DIV | AND) termo )* ;
+termo: fator;
 fator:
 	variavel
 	| Frase
