@@ -12,12 +12,9 @@ public class MiniPascalVariable extends MiniPascalSymbol{
     private byte type;
     private Object value;
 
-    public MiniPascalVariable(String name){
+    public MiniPascalVariable(String name, byte type){
         super(name);
-    }
-
-    public void setType(byte type){
-        this.type=type;
+        this.type = type;
     }
 
     public byte getType(){
