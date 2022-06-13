@@ -80,7 +80,7 @@ variavel: identificador;
 	)?
 	;
 expressaoSimp:
-	('+' | '-' {verExpressao().negative();} )? termo {verExpressao().setFactor1(ultFator);} (('+' | '-' | OR | '*' | DIV | AND) {verExpressao().setOperator(new MiniPascalOperator(_input.LT(-1).getText()));} termo {verExpressao().setFactor1(ultFator);} )* ;
+	('+' | '-' {verExpressao().negative();} )? termo {verExpressao().setFactor1(ultFator);} (('+' | '-' | OR | '*' | DIV | AND) {verExpressao().setOperator(new MiniPascalOperator(_input.LT(-1).getText()));} termo {verExpressao().setFactor2(ultFator);} )* ;
 termo: fator;
 fator:
 	variavel {ultFator = obterVariavel(_input.LT(-1));}
