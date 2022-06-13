@@ -9,4 +9,14 @@ public class MiniPascalOperator{
     public static final byte AND=4;
     public static final byte OR = 5;
 
+    private byte operator;
+
+    public MiniPascalOperator(byte operator){
+        this.operator = operator;
+    }
+
+    public byte getOperator(){
+        return operator;
+    }
+
 }
