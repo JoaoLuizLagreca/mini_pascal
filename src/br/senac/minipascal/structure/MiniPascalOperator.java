@@ -17,7 +17,7 @@ public class MiniPascalOperator{
     public static final byte GREATEREQUAL = 10;
     public static final byte GREATER = 11;
 
-    private static Hashtable<String, Byte> operators = new Hashtable();
+    private static Hashtable<String, Byte> operators = new Hashtable<String, Byte>();
     static{
         operators.put("+", Byte.valueOf(ADD));
         operators.put("-", Byte.valueOf(SUB));
