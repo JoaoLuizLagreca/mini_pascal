@@ -8,13 +8,15 @@ options {
 	import br.senac.minipascal.structure.*;
 	import java.util.Hashtable;
 	import org.antlr.v4.runtime.Token;
+	import java.util.Stack;
 }
 
 @parser::members{
 	byte ultimoTipo;
 	MiniPascalVariable ultimaVar;
-	Hashtable<String, MiniPascalFactor> vars = new Hashtable();
-
+	MiniPascalFactor ultFator;
+	Hashtable<String, MiniPascalFactor> vars = new Hashtable<String, MiniPascalFactor>();
+	Stack exprs = new Stack();
 	void adicionarVariavel(Token tk){
 		MiniPascalVariable var = new MiniPascalVariable(
 			ultimoTipo,
@@ -26,6 +28,10 @@ options {
 
 	MiniPascalVariable obterVariavel(Token tk){
 		return (MiniPascalVariable)vars.get(tk.getText());
+	}
+
+	MiniPascalExpression verExpressao(){
+		return (MiniPascalExpression)exprs.peek();
 	}
 }
 
@@ -58,20 +64,51 @@ atribuicao: variavel {
 	ultimaVar=obterVariavel(_input.LT(-1));
 } ':=' expressao ;
 variavel: identificador;
-expressao: expressaoSimp (relacao expressaoSimp {
-	//TODO: Retornar erro se a variável não for BOOLEAN
-}
-)? ;
+	expressao: {
+		exprs.push(new MiniPascalExpression()); //Adiciona expressão na pilha
+	} expressaoSimp {
+		ultFator = (MiniPascalFactor)exprs.pop(); //Remove expressão da pilha
+	} (
+		relacao {
+			exprs.push(new MiniPascalExpression());
+			verExpressao().setFactor1(ultFator);
+			verExpressao().setOperator(new MiniPascalOperator(_input.LT(-1).getText()));
+		} expressaoSimp {
+			verExpressao().setFactor2(ultFator);
+			ultFator = (MiniPascalFactor)exprs.pop(); // Remove agora essa expressão da pilha
+		}
+	)?
+	;
 expressaoSimp:
-	('+' | '-')? termo (('+' | '-' | OR | '*' | DIV | AND) termo )* ;
+	('+' | '-' {verExpressao().negative();} )? termo {verExpressao().setFactor1(ultFator);} (('+' | '-' | OR | '*' | DIV | AND) {verExpressao().setOperator(new MiniPascalOperator(_input.LT(-1).getText()));} termo {verExpressao().setFactor1(ultFator);} )* ;
 termo: fator;
 fator:
-	variavel
-	| Frase
-	| numero
-	| '(' expressao ')'
-	| truefalse
-	| NOT fator ;
+	variavel {ultFator = obterVariavel(_input.LT(-1));}
+	| Frase {
+		MiniPascalAttribute att = new MiniPascalAttribute(MiniPascalType.STRING);
+		att.setValue(_input.LT(-1).getText());
+		ultFator = att;
+	}
+	| numero {
+		MiniPascalAttribute att = new MiniPascalAttribute(MiniPascalType.INT);
+		att.setValue(_input.LT(-1).getText());
+		ultFator = att;
+	}
+	| '(' expressao ')' //ultFator na expressao
+	| truefalse {
+		MiniPascalAttribute att = new MiniPascalAttribute(MiniPascalType.BOOLEAN);
+		att.setValue(_input.LT(-1).getText());
+		ultFator = att;
+	}
+	| NOT fator {
+		MiniPascalExpression e = new MiniPascalExpression();
+		e.setFactor1(ultFator);
+		e.setOperator(new MiniPascalOperator(MiniPascalOperator.EQUAL));
+		MiniPascalAttribute att = new MiniPascalAttribute(MiniPascalType.BOOLEAN);
+		att.setValue("FALSE");
+		e.setFactor2(att);
+		ultFator=e;
+	};
 
 numero: Numero ;
 relacao:
