@@ -24,9 +24,7 @@ comRep: WHILE expressao DO comando ;
 
 
 identificador: Identificador ;
-tipo: INT {System.out.println("INT");}
-	| BOOLEAN {System.out.println("BOOLEAN");}
-	;
+tipo: INT | BOOLEAN ;
 listaIdent: identificador (',' identificador)* ;
 listaExpress: expressao (',' expressao)* ;
 declProc: PROCEDURE identificador paramForm? ';' bloco ;
