@@ -19,6 +19,10 @@ public class MiniPascalExpression extends MiniPascalFactor{
     }
 
     public void setFactor2(MiniPascalFactor fac2){
+
+        if(fac2.getType()!=fac1.getType())
+            throw new MiniPascalSemanticException("Attributes are not of the same type");
+
         this.fac2 = fac2;
     }
 
