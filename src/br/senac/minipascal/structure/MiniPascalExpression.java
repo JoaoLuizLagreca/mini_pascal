@@ -28,6 +28,25 @@ public class MiniPascalExpression extends MiniPascalFactor{
 
     public void setOperator(MiniPascalOperator op){
         this.op = op;
+        switch (op.getOperator()){
+            case MiniPascalOperator.ADD
+                ||MiniPascalOperator.SUB
+                ||MiniPascalOperator.MULTIPLY
+                ||MiniPascalOperator.DIVIDE:
+                    setType(MiniPascalType.INT);
+                    break;
+            case MiniPascalOperator.AND
+                || MiniPascalOperator.OR
+                || MiniPascalOperator.EQUAL
+                || MiniPascalOperator.DIFFER
+                || MiniPascalOperator.LOWER
+                || MiniPascalOperator.LOWEREQUAL
+                || MiniPascalOperator.GREATEREQUAL
+                || MiniPascalOperator.GREATER:
+                    setType(MiniPascalType.BOOLEAN);
+                    break;
+
+        }
     }
 
     public MiniPascalOperator getOperator(){
