@@ -23,6 +23,10 @@ options {
 		symbols.put(var.getName(), var);
 		System.out.println("Variável "+var.getName()+" tipo "+var.getType());
 	}
+
+	MiniPascalVariable obterVariavel(Token tk){
+		return (MiniPascalVariable)symbols.get(tk.getText());
+	}
 }
 
 //Regras sintáticas
@@ -50,11 +54,17 @@ listaExpress: expressao (',' expressao)* ;
 declProc: PROCEDURE identificador paramForm? ';' bloco ;
 paramForm: '(' secParamForm (';' secParamForm)* ')' ;
 secParamForm: VAR listaIdent ':' identificador ;
-atribuicao: varAtribuicao ':=' expressao ;
+atribuicao: varAtribuicao {
+	ultimaVar=obterVariavel(_input.LT(-1));
+	expressoes.clear();
+} ':=' expressao ;
 varAtribuicao: identificador;
 variavel: identificador
 	| identificador expressao? ;
-expressao: expressaoSimp (relacao expressaoSimp)? ;
+expressao: expressaoSimp (relacao expressaoSimp {
+	//TODO: Retornar erro se a variável não for BOOLEAN
+}
+)? ;
 expressaoSimp:
 	('+' | '-')? termo (('+' | '-' | OR) termo )* ;
 termo: fator (('*' | DIV | AND) fator )* ;
