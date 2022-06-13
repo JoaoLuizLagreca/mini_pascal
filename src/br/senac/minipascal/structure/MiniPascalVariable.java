@@ -5,9 +5,9 @@ import java.lang.Boolean;
 
 public class MiniPascalVariable extends MiniPascalSymbol{
 
-    public static byte TYPE_UNDEFINED=0;
-    public static byte TYPE_INT = 1;
-    public static byte TYPE_BOOLEAN = 2;
+    public static final byte TYPE_UNDEFINED=0;
+    public static final byte TYPE_INT = 1;
+    public static final byte TYPE_BOOLEAN = 2;
 
     private byte type;
     private Object value;
