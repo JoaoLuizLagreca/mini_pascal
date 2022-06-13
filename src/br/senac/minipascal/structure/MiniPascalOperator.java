@@ -36,7 +36,7 @@ public class MiniPascalOperator{
     private byte operator;
 
     public MiniPascalOperator(String operator){
-        this.operator = operators.get(operator.toLoweCase());
+        this.operator = operators.get(operator.toUpperCase());
     }
 
     public MiniPascalOperator(byte operator){
