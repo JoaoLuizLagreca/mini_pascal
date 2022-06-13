@@ -17,9 +17,9 @@ public class MiniPascalType{
                 return "BOOLEAN";
             case STRING:
                 return "STRING";
-            default:
-                throw new Exception("Unknown type code");
+
         }
+        return "UNKNOWN";
     }
 
 }

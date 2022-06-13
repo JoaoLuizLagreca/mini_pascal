@@ -1,37 +1,44 @@
 package br.senac.minipascal.structure;
 
-public class MiniPascalAttribute extends MiniPascalSymbol{
+import java.lang.Integer;
+import java.lang.Boolean;
 
-    private byte type;
+public class MiniPascalAttribute extends MiniPascalFactor{
+
     private Object value;
+
     public MiniPascalAttribute(byte type){
-        this.type = type;
+        super(type);
     }
-
-    public void setValue(String value){
-
-        switch(type){
-
+    public Object getValue(){
+        switch(getType()){
             case MiniPascalType.INT:
-                this.value = Integer.getInteger(value);
-            break;
+                return (Integer)value;
             case MiniPascalType.BOOLEAN:
-                this.value = Boolean.valueOf(value);
-            break;
-            case MiniPascalType.String:
-                this.value = value;
-            break;
+                return (Boolean)value;
+            case MiniPascalType.STRING:
+                return (String)value;
 
         }
 
-    }
-
-    public Object getValue(){
         return value;
     }
 
-    public byte getType(){
-        return type;
+    public void setValue(String value){
+        switch(getType()){
+            case MiniPascalType.INT:
+               this.value = Integer.getInteger(value);
+               break;
+            case MiniPascalType.BOOLEAN:
+                this.value = Boolean.getBoolean(value);
+                break;
+            case MiniPascalType.STRING:
+                this.value = value;
+                break;
+
+        }
+
+        this.value = value;
     }
 
 }

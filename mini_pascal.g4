@@ -13,19 +13,19 @@ options {
 @parser::members{
 	byte ultimoTipo;
 	MiniPascalVariable ultimaVar;
-	Hashtable<String, MiniPascalSymbol> symbols = new Hashtable();
+	Hashtable<String, MiniPascalFactor> vars = new Hashtable();
 
 	void adicionarVariavel(Token tk){
 		MiniPascalVariable var = new MiniPascalVariable(
-			tk.getText(),
-			ultimoTipo
+			ultimoTipo,
+			tk.getText()
 		);
-		symbols.put(var.getName(), var);
-		System.out.println("Variável "+var.getName()+" tipo "+var.getType());
+		vars.put(var.getName(), var);
+		System.out.println("Variável "+var.getName()+" tipo "+MiniPascalType.toString(var.getType()));
 	}
 
 	MiniPascalVariable obterVariavel(Token tk){
-		return (MiniPascalVariable)symbols.get(tk.getText());
+		return (MiniPascalVariable)vars.get(tk.getText());
 	}
 }
 
@@ -54,9 +54,8 @@ listaExpress: expressao (',' expressao)* ;
 declProc: PROCEDURE identificador paramForm? ';' bloco ;
 paramForm: '(' secParamForm (';' secParamForm)* ')' ;
 secParamForm: VAR listaIdent ':' identificador ;
-atribuicao: varAtribuicao {
+atribuicao: variavel {
 	ultimaVar=obterVariavel(_input.LT(-1));
-	expressoes.clear();
 } ':=' expressao ;
 variavel: identificador;
 expressao: expressaoSimp (relacao expressaoSimp {
