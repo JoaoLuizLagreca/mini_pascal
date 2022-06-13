@@ -9,5 +9,5 @@ begin
         d := c + 4;
         e := 4*(a+(c DIV d)*2);
 
-        write(a)
+        write(e)
 end.
