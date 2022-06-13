@@ -15,7 +15,7 @@ public class MiniPascalExpression extends MiniPascalFactor{
     }
 
     public MiniPascalFactor getFactor1(){
-        return f1;
+        return fac1;
     }
 
     public void setFactor2(MiniPascalFactor fac2){
@@ -27,7 +27,7 @@ public class MiniPascalExpression extends MiniPascalFactor{
     }
 
     public MiniPascalFactor getFactor2(){
-        return f2;
+        return fac2;
     }
 
     public void setOperator(MiniPascalOperator op){
