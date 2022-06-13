@@ -6,6 +6,22 @@ options {
 
 @header{
 	import br.senac.minipascal.structure.*;
+	import java.util.Hashtable;
+	import org.antlr.v4.runtime.Token;
+}
+
+@parser::members{
+	byte ultimoTipo;
+	Hashtable<String, MiniPascalSymbol> symbols = new Hashtable();
+
+	void adicionarVariavel(Token tk){
+		MiniPascalVariable var = new MiniPascalVariable(
+			tk.getText(),
+			ultimoTipo
+		);
+		symbols.put(var.getName(), var);
+		System.out.println("Variável "+var.getName()+" tipo "+var.getType());
+	}
 }
 
 //Regras sintáticas
@@ -14,7 +30,7 @@ bloco: parDeclVar? parDeclSubRot comComp ;
 
 parDeclVar: declVar (';' declVar)* ';' ;
 parDeclSubRot: (declProc ';')* ;
-declVar: tipo listaIdent ;
+declVar: tipo listaIdent;
 
 comando: atribuicao | chamProc | comComp | comCond | comRep ;
 chamProc: identificador ('(' listaExpress ')' )? ;
@@ -24,8 +40,11 @@ comRep: WHILE expressao DO comando ;
 
 
 identificador: Identificador ;
-tipo: INT | BOOLEAN ;
-listaIdent: identificador (',' identificador)* ;
+tipo:
+	  INT {ultimoTipo=MiniPascalVariable.TYPE_INT;}
+	| BOOLEAN {ultimoTipo=MiniPascalVariable.TYPE_BOOLEAN;};
+listaIdent: identificador {adicionarVariavel(_input.LT(-1));}
+	 (',' identificador {adicionarVariavel(_input.LT(-1));})* ;
 listaExpress: expressao (',' expressao)* ;
 declProc: PROCEDURE identificador paramForm? ';' bloco ;
 paramForm: '(' secParamForm (';' secParamForm)* ')' ;
