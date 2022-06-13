@@ -17,26 +17,26 @@ public class MiniPascalOperator{
     public static final byte GREATEREQUAL = 10;
     public static final byte GREATER = 11;
 
-    private static Hashtable operators = new Hashtable();
+    private static Hashtable<String, Byte> operators = new Hashtable();
     static{
-        operators.put("+", ADD);
-        operators.put("-", SUB);
-        operators.put("*", MULTIPLY);
-        operators.put("DIV", DIVIDE);
-        operators.put("AND", AND);
-        operators.put("OR", OR);
-        operators.put("=", EQUAL);
-        operators.put("<>", DIFFER);
-        operators.put("<", LOWER);
-        operators.put("<=", LOWEREQUAL);
-        operators.put(">=", GREATEREQUAL);
-        operators.put(">", GREATER);
+        operators.put("+", Byte.valueOf(ADD));
+        operators.put("-", Byte.valueOf(SUB));
+        operators.put("*", Byte.valueOf(MULTIPLY));
+        operators.put("DIV", Byte.valueOf(DIVIDE));
+        operators.put("AND", Byte.valueOf(AND));
+        operators.put("OR", Byte.valueOf(OR));
+        operators.put("=", Byte.valueOf(EQUAL));
+        operators.put("<>", Byte.valueOf(DIFFER));
+        operators.put("<", Byte.valueOf(LOWER));
+        operators.put("<=", Byte.valueOf(LOWEREQUAL));
+        operators.put(">=", Byte.valueOf(GREATEREQUAL));
+        operators.put(">", Byte.valueOf(GREATER));
     }
 
     private byte operator;
 
     public MiniPascalOperator(String operator){
-        this.operator = operators.get(operator.toUpperCase());
+        this.operator = operators.get(operator.toUpperCase()).byteValue();
     }
 
     public MiniPascalOperator(byte operator){
