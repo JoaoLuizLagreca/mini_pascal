@@ -58,9 +58,7 @@ atribuicao: varAtribuicao {
 	ultimaVar=obterVariavel(_input.LT(-1));
 	expressoes.clear();
 } ':=' expressao ;
-varAtribuicao: identificador;
-variavel: identificador
-	| identificador expressao? ;
+variavel: identificador;
 expressao: expressaoSimp (relacao expressaoSimp {
 	//TODO: Retornar erro se a variável não for BOOLEAN
 }
