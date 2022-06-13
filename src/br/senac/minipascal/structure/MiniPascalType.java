@@ -2,9 +2,24 @@ package br.senac.minipascal.structure;
 
 public class MiniPascalType{
 
-    public static final byte TYPE_UNDEFINED=0;
-    public static final byte TYPE_INT = 1;
-    public static final byte TYPE_BOOLEAN = 2;
-    public static final byte TYPE_STRING = 3;
+    public static final byte UNDEFINED=0;
+    public static final byte INT = 1;
+    public static final byte BOOLEAN = 2;
+    public static final byte STRING = 3;
+
+    public static String toString(byte type){
+        switch(type){
+            case UNDEFINED:
+                return "UNDEFINED";
+            case INT:
+                return "INT";
+            case BOOLEAN:
+                return "BOOLEAN";
+            case STRING:
+                return "STRING";
+            default:
+                throw new Exception("Unknown type code");
+        }
+    }
 
 }
