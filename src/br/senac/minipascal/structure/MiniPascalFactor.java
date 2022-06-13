@@ -12,4 +12,8 @@ public class MiniPascalFactor{
         return type;
     }
 
+    protected void setType(byte type){
+        this.type = type;
+    }
+
 }
