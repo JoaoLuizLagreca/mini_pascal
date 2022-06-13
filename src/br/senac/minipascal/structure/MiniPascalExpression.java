@@ -7,7 +7,7 @@ public class MiniPascalExpression extends MiniPascalFactor{
     private MiniPascalOperator op;
 
     public MiniPascalExpression(){
-        super(0);
+        super(MiniPascalType.UNDEFINED);
     }
 
     public void setFactor1(MiniPascalFactor fac1){
