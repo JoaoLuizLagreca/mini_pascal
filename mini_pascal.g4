@@ -64,7 +64,7 @@ atribuicao: variavel {
 	ultimaVar=obterVariavel(_input.LT(-1));
 } ':=' expressao ;
 variavel: identificador;
-	expressao: {
+expressao: {
 		exprs.push(new MiniPascalExpression()); //Adiciona expressão na pilha
 	} expressaoSimp {
 		ultFator = (MiniPascalFactor)exprs.pop(); //Remove expressão da pilha
