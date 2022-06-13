@@ -34,19 +34,19 @@ public class MiniPascalExpression extends MiniPascalFactor{
         this.op = op;
         switch (op.getOperator()){
             case MiniPascalOperator.ADD
-                ||MiniPascalOperator.SUB
-                ||MiniPascalOperator.MULTIPLY
-                ||MiniPascalOperator.DIVIDE:
+                |MiniPascalOperator.SUB
+                |MiniPascalOperator.MULTIPLY
+                |MiniPascalOperator.DIVIDE:
                     setType(MiniPascalType.INT);
                     break;
             case MiniPascalOperator.AND
-                || MiniPascalOperator.OR
-                || MiniPascalOperator.EQUAL
-                || MiniPascalOperator.DIFFER
-                || MiniPascalOperator.LOWER
-                || MiniPascalOperator.LOWEREQUAL
-                || MiniPascalOperator.GREATEREQUAL
-                || MiniPascalOperator.GREATER:
+                | MiniPascalOperator.OR
+                | MiniPascalOperator.EQUAL
+                | MiniPascalOperator.DIFFER
+                | MiniPascalOperator.LOWER
+                | MiniPascalOperator.LOWEREQUAL
+                | MiniPascalOperator.GREATEREQUAL
+                | MiniPascalOperator.GREATER:
                     setType(MiniPascalType.BOOLEAN);
                     break;
 
