@@ -46,8 +46,8 @@ comRep: WHILE expressao DO comando ;
 
 identificador: Identificador ;
 tipo:
-	  INT {ultimoTipo=MiniPascalVariable.TYPE_INT;}
-	| BOOLEAN {ultimoTipo=MiniPascalVariable.TYPE_BOOLEAN;};
+	  INT {ultimoTipo=MiniPascalType.INT;}
+	| BOOLEAN {ultimoTipo=MiniPascalType.BOOLEAN;};
 listaIdent: identificador {adicionarVariavel(_input.LT(-1));}
 	 (',' identificador {adicionarVariavel(_input.LT(-1));})* ;
 listaExpress: expressao (',' expressao)* ;

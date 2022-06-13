@@ -5,39 +5,25 @@ import java.lang.Boolean;
 
 public class MiniPascalVariable extends MiniPascalSymbol{
 
-    public static final byte TYPE_UNDEFINED=0;
-    public static final byte TYPE_INT = 1;
-    public static final byte TYPE_BOOLEAN = 2;
-
-    private byte type;
-    private Object value;
+    private MiniPascalAttribute attribute;
 
     public MiniPascalVariable(String name, byte type){
         super(name);
-        this.type = type;
+        attribute = new MiniPascalAttribute(type);
     }
 
     public byte getType(){
-        return type;
+        return attribute.getType();
     }
 
     public void setValue(String value){
 
-        switch(type){
-
-            case TYPE_INT:
-                this.value = Integer.getInteger(value);
-            break;
-            case TYPE_BOOLEAN:
-                this.value = Boolean.valueOf(value);
-            break;
-
-        }
+        attribute.setValue(value);
 
     }
 
     public Object getValue(){
-        return value;
+        return attribute.getValue();
     }
 
 }
