@@ -2,6 +2,7 @@ package br.senac.minipascal.structure;
 
 public class MiniPascalExpression extends MiniPascalFactor{
 
+    private byte mul=1; // fac1 * mul
     private MiniPascalFactor fac1, fac2;
     private MiniPascalOperator op;
 
@@ -31,6 +32,10 @@ public class MiniPascalExpression extends MiniPascalFactor{
 
     public MiniPascalOperator getOperator(){
         return op;
+    }
+
+    public void negative(){
+        mul=-1;
     }
 
 }
