@@ -5,7 +5,7 @@ options {
 }
 
 @header{
-	import br.senac.minipascal.structure.MiniPascalVariable;
+	import br.senac.minipascal.structure.*;
 }
 
 //Regras sintáticas
