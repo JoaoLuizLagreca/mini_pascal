@@ -6,7 +6,7 @@ ADO de Teoria da Computação e Compiladores na universidade SENAC
 
 ✅Análise sintática
 
-🟠Análise semântica
+☑Análise semântica
 
 ## Legenda
 
