@@ -67,23 +67,82 @@ variavel: identificador;
 expressao: {
 		exprs.push(new MiniPascalExpression()); //Adiciona expressão na pilha
 	} expressaoSimp {
-		ultFator = (MiniPascalFactor)exprs.pop(); //Remove expressão da pilha
+
+		verExpressao().setFactor1(ultFator); //Define a expressão simples como fator 1
+
 	} (
 		relacao {
-			exprs.push(new MiniPascalExpression());
-			verExpressao().setFactor1(ultFator);
-			verExpressao().setOperator(new MiniPascalOperator(_input.LT(-1).getText()));
+
+			verExpressao().setOperator(new MiniPascalOperator(_input.LT(-1).getText())); //Se tiver uma relação, adiciona o operador
+
 		} expressaoSimp {
-			verExpressao().setFactor2(ultFator);
+			verExpressao().setFactor2(ultFator); //E coloca a próxima expressão simples como fator 2
+
 			ultFator = (MiniPascalFactor)exprs.pop(); // Remove agora essa expressão da pilha
 		}
 	)?
+	{
+
+		//Verificar se a expressão raíz é um fator comum, e não uma expressão. Quer dizer, se só há o fator 1. Quer dizer, se a atribuição da variável não é uma comparação
+		if ( ((MiniPascalExpression)ultFator).getOperator() == null ){
+
+			//Se não houver um operador, torne o último fato um fator comum
+			ultFator = ((MiniPascalExpression)ultFator).getFactor1();
+
+		}
+
+	}
 	;
 expressaoSimp:
-	('+' | '-' {verExpressao().negative();} )? termo {verExpressao().setFactor1(ultFator);} (('+' | '-' | OR | '*' | DIV | AND) {verExpressao().setOperator(new MiniPascalOperator(_input.LT(-1).getText()));} termo {verExpressao().setFactor2(ultFator);} )* ;
+
+	{
+
+		exprs.push(new MiniPascalExpression()); //Adiciona expressão na pilha
+
+	}
+
+	('+' | '-' {verExpressao().negative();} )? termo
+	{
+		verExpressao().setFactor1(ultFator);
+		int pilhas = 0;
+	}
+	(
+
+			('+' | '-' | OR | '*' | DIV | AND)
+			{
+
+				pilhas++;
+
+				verExpressao().setOperator(new MiniPascalOperator(_input.LT(-1).getText()));} termo {
+
+					MiniPascalExpression e = verExpressao();
+
+					exprs.push(new MiniPascalExpression()); //Adiciona expressão na pilha
+
+					verExpressao().setFactor1(ultFator);
+					e.setFactor2(verExpressao()); //FIXME: Última expressão ainda não tem tipo, é necessário atribuir à ela primeiro
+
+			}
+
+		)*
+
+		{
+
+			while(pilhas>0){
+				pilhas--;
+			}
+
+			ultFator = (MiniPascalExpression)exprs.pop();
+
+
+		}
+
+
+
+	;
 termo: fator;
 fator:
-	variavel {ultFator = obterVariavel(_input.LT(-1));}
+	variavel {System.out.println("variavel");;ultFator = obterVariavel(_input.LT(-1));}
 	| Frase {
 		MiniPascalAttribute att = new MiniPascalAttribute(MiniPascalType.STRING);
 		att.setValue(_input.LT(-1).getText());
