@@ -2,6 +2,7 @@ package br.senac.minipascal.structure;
 
 public class MiniPascalType{
 
+    public static final byte IGNORE=-1;
     public static final byte UNDEFINED=0;
     public static final byte INT = 1;
     public static final byte BOOLEAN = 2;
@@ -17,6 +18,8 @@ public class MiniPascalType{
                 return "BOOLEAN";
             case STRING:
                 return "STRING";
+            case IGNORE:
+                return "IGNORE";
 
         }
         return "UNKNOWN";
