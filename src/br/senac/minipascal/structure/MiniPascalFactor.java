@@ -4,7 +4,7 @@ import org.antlr.v4.runtime.Token;
 
 public class MiniPascalFactor{
 
-    private byte type;
+    private byte type = MiniPascalType.UNDEFINED;
     private Token token;
 
     public MiniPascalFactor(byte type){
