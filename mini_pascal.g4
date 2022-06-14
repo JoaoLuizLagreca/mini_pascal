@@ -15,19 +15,34 @@ options {
 	byte ultimoTipo;
 	MiniPascalVariable ultimaVar;
 	Hashtable<String, MiniPascalFactor> vars = new Hashtable<String, MiniPascalFactor>();
+	Token tknn;
+	MiniPascalOperator op;
 	Stack exprs = new Stack();
-	void adicionarVariavel(Token tk){
+	void adicionarVariavel(Token tknn){
 		MiniPascalVariable var = new MiniPascalVariable(
 			ultimoTipo,
-			tk.getText()
+			tknn.getText()
 		);
 		vars.put(var.getName(), var);
 		System.out.println("Variável "+var.getName()+" tipo "+MiniPascalType.toString(var.getType()));
 	}
 
-	MiniPascalVariable obterVariavel(Token tk){
-		return (MiniPascalVariable)vars.get(tk.getText());
+	MiniPascalVariable obterVariavel(Token tknn){
+		return (MiniPascalVariable)vars.get(tknn.getText());
 	}
+
+	void adicionaFator(MiniPascalFactor fator, Token tknn){
+
+		if (fator.getType()!=MiniPascalType.IGNORE)
+			ultimoTipo = fator.getType();
+
+		//TODO: Compare com a variável
+
+		fator.setToken(tknn);
+		exprs.push(fator);
+
+	}
+
 }
 
 //Regras sintáticas
@@ -41,8 +56,16 @@ declVar: tipo listaIdent;
 comando: atribuicao | chamProc | comComp | comCond | comRep ;
 chamProc: identificador ('(' listaExpress ')' )? ;
 comComp: BEGIN comando (';' comando)* END ;
-comCond: IF expressao THEN comando (ELSE comando)? ;
-comRep: WHILE expressao DO comando ;
+comCond: IF {
+
+	ultimaVar = new MiniPascalVariable(MiniPascalType.BOOLEAN, "");
+
+} expressao THEN comando (ELSE comando)? ;
+comRep: WHILE {
+
+	ultimaVar = new MiniPascalVariable(MiniPascalType.BOOLEAN, "");
+
+} expressao DO comando ;
 
 
 identificador: Identificador ;
@@ -61,49 +84,82 @@ atribuicao: variavel {
 variavel: identificador;
 expressao: expressaoSimp (relacao {
 
-			//TODO: Adicionar operador
+		if(ultimaVar.getType()!=MiniPascalType.BOOLEAN){
+			throw new MiniPascalSemanticException("Não se pode atribuir relação em uma variável tipo "+MiniPascalType.toString(ultimaVar.getType()));
+		}
+
+		tknn = _input.LT(-1);
+		op = new MiniPascalOperator(tknn.getText());
+		adicionaFator(op, tknn);
 
 		} expressaoSimp)?
 	;
 expressaoSimp:
-	('+' | '-' {verExpressao().negative();} )? termo
-	{
-		verExpressao().setFactor1(ultFator);
-		int pilhas = 0;
-	}
-	(('+' | '-' | OR | '*' | DIV | AND) termo )*
+	(('+' | '-') {
+
+		tknn = _input.LT(-1);
+		op = new MiniPascalOperator(tknn.getText());
+		adicionaFator(op, tknn);
+
+	})? termo
+	(('+' | '-' | OR | '*' | DIV | AND) {
+
+		tknn = _input.LT(-1);
+		op = new MiniPascalOperator(tknn.getText());
+		adicionaFator(op, tknn);
+
+	} termo )*
 
 
 
 	;
 termo: fator;
 fator:
-	variavel {System.out.println("variavel");;ultFator = obterVariavel(_input.LT(-1));}
+	variavel {
+		tknn = _input.LT(-1);
+		adicionaFator(obterVariavel(tknn), tknn);
+	}
 	| Frase {
+	tknn = _input.LT(-1);
 		MiniPascalAttribute att = new MiniPascalAttribute(MiniPascalType.STRING);
-		att.setValue(_input.LT(-1).getText());
-		ultFator = att;
+		att.setValue(tknn.getText());
+		adicionaFator(att, tknn);
 	}
 	| numero {
+	tknn = _input.LT(-1);
 		MiniPascalAttribute att = new MiniPascalAttribute(MiniPascalType.INT);
-		att.setValue(_input.LT(-1).getText());
-		ultFator = att;
+		att.setValue(tknn.getText());
+		adicionaFator(att, tknn);
 	}
-	| '(' expressao ')' //ultFator na expressao
+	| '('{
+
+		tknn = _input.LT(-1);
+		op = new MiniPascalOperator(MiniPascalOperator.OPENPARENT);
+		adicionaFator(op, tknn);
+
+	}
+
+
+	expressao ')' {
+
+		tknn = _input.LT(-1);
+		op = new MiniPascalOperator(MiniPascalOperator.CLOSEPARENT);
+		adicionaFator(op, tknn);
+
+	}
 	| truefalse {
 		MiniPascalAttribute att = new MiniPascalAttribute(MiniPascalType.BOOLEAN);
-		att.setValue(_input.LT(-1).getText());
-		ultFator = att;
+		tknn = _input.LT(-1);
+		att.setValue(tknn.getText());
+		adicionaFator(att, tknn);
 	}
-	| NOT fator {
-		MiniPascalExpression e = new MiniPascalExpression();
-		e.setFactor1(ultFator);
-		e.setOperator(new MiniPascalOperator(MiniPascalOperator.EQUAL));
-		MiniPascalAttribute att = new MiniPascalAttribute(MiniPascalType.BOOLEAN);
-		att.setValue("FALSE");
-		e.setFactor2(att);
-		ultFator=e;
-	};
+	| NOT {
+
+		op = new MiniPascalOperator(MiniPascalOperator.NOT);
+		tknn = _input.LT(-1);
+		adicionaFator(op, tknn);
+
+	} fator;
 
 numero: Numero ;
 relacao:
