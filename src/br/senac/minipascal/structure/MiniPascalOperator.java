@@ -56,30 +56,56 @@ public class MiniPascalOperator extends MiniPascalFactor{
     }
 
     private void setOperator(byte ope){
-        switch (op.getOperator()){
-            case ADD
-                |SUB
-                |MULTIPLY
-                |DIVIDE:
-                    setType(MiniPascalType.INT);
-                    break;
-            case AND
-                | OR
-                | EQUAL
-                | DIFFER
-                | LOWER
-                | LOWEREQUAL
-                | GREATEREQUAL
-                | GREATER
-                | NOT:
-                    setType(MiniPascalType.BOOLEAN);
-                    break;
+        switch (getOperator()){
+            case ADD:
+                setType(MiniPascalType.INT);
+                break;
+            case SUB:
+                setType(MiniPascalType.INT);
+                break;
+            case MULTIPLY:
+                setType(MiniPascalType.INT);
+                break;
+            case DIVIDE:
+                setType(MiniPascalType.INT);
+                break;
+            case AND:
+                setType(MiniPascalType.BOOLEAN);
+                break;
+            case OR:
+                setType(MiniPascalType.BOOLEAN);
+                break;
+            case EQUAL:
+                setType(MiniPascalType.BOOLEAN);
+                break;
+            case DIFFER:
+                setType(MiniPascalType.BOOLEAN);
+                break;
+            case LOWER:
+                setType(MiniPascalType.BOOLEAN);
+                break;
+            case LOWEREQUAL:
+                setType(MiniPascalType.BOOLEAN);
+                break;
+            case GREATEREQUAL:
+                setType(MiniPascalType.BOOLEAN);
+                break;
+            case GREATER:
+                setType(MiniPascalType.BOOLEAN);
+                break;
+            case NOT:
+                setType(MiniPascalType.BOOLEAN);
+                break;
 
-            case OPENPARENT
-                | CLOSEPARENT:
-                    setType(MiniPascalType.IGNORE);
+            case OPENPARENT:
+                setType(MiniPascalType.IGNORE);
+                break;
+            case CLOSEPARENT:
+                setType(MiniPascalType.IGNORE);
+                break;
 
         }
+
     }
 
 }
