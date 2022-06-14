@@ -16,6 +16,8 @@ public class MiniPascalOperator{
     public static final byte LOWEREQUAL = 9;
     public static final byte GREATEREQUAL = 10;
     public static final byte GREATER = 11;
+    public static final byte OPENPARENT = 12;
+    public static final byte CLOSEPARENT = 13;
 
     private static Hashtable<String, Byte> operators = new Hashtable<String, Byte>();
     static{
@@ -31,6 +33,8 @@ public class MiniPascalOperator{
         operators.put("<=", Byte.valueOf(LOWEREQUAL));
         operators.put(">=", Byte.valueOf(GREATEREQUAL));
         operators.put(">", Byte.valueOf(GREATER));
+        operators.put("(", Byte.valueOf(OPENPARENT));
+        operators.put(")", Byte.valueOf(CLOSEPARENT));
     }
 
     private byte operator;
