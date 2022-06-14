@@ -2,7 +2,7 @@ package br.senac.minipascal.structure;
 
 import java.util.Hashtable;
 
-public class MiniPascalOperator{
+public class MiniPascalOperator extends MiniPascalFactor{
 
     public static final byte ADD=0;
     public static final byte SUB=1;
@@ -40,15 +40,39 @@ public class MiniPascalOperator{
     private byte operator;
 
     public MiniPascalOperator(String operator){
-        this.operator = operators.get(operator.toUpperCase()).byteValue();
+        super(MiniPascalType.UNDEFINED);
+        setOperator(operators.get(operator.toUpperCase()).byteValue());
     }
 
     public MiniPascalOperator(byte operator){
-        this.operator = operator;
+        super(MiniPascalType.UNDEFINED);
+        setOperator(operator);
     }
 
     public byte getOperator(){
         return operator;
+    }
+
+    private void setOperator(byte ope){
+        switch (op.getOperator()){
+            case ADD
+                |SUB
+                |MULTIPLY
+                |DIVIDE:
+                    setType(MiniPascalType.INT);
+                    break;
+            case AND
+                | OR
+                | EQUAL
+                | DIFFER
+                | LOWER
+                | LOWEREQUAL
+                | GREATEREQUAL
+                | GREATER:
+                    setType(MiniPascalType.BOOLEAN);
+                    break;
+
+        }
     }
 
 }
