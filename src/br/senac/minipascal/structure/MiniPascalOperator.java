@@ -18,6 +18,7 @@ public class MiniPascalOperator extends MiniPascalFactor{
     public static final byte GREATER = 11;
     public static final byte OPENPARENT = 12;
     public static final byte CLOSEPARENT = 13;
+    public static final byte NOT = 14;
 
     private static Hashtable<String, Byte> operators = new Hashtable<String, Byte>();
     static{
@@ -35,6 +36,7 @@ public class MiniPascalOperator extends MiniPascalFactor{
         operators.put(">", Byte.valueOf(GREATER));
         operators.put("(", Byte.valueOf(OPENPARENT));
         operators.put(")", Byte.valueOf(CLOSEPARENT));
+        operators.put("not", Byte.valueOf(NOT));
     }
 
     private byte operator;
@@ -68,7 +70,8 @@ public class MiniPascalOperator extends MiniPascalFactor{
                 | LOWER
                 | LOWEREQUAL
                 | GREATEREQUAL
-                | GREATER:
+                | GREATER
+                | NOT:
                     setType(MiniPascalType.BOOLEAN);
                     break;
 
