@@ -14,7 +14,6 @@ options {
 @parser::members{
 	byte ultimoTipo;
 	MiniPascalVariable ultimaVar;
-	MiniPascalFactor ultFator;
 	Hashtable<String, MiniPascalFactor> vars = new Hashtable<String, MiniPascalFactor>();
 	Stack exprs = new Stack();
 	void adicionarVariavel(Token tk){
@@ -28,10 +27,6 @@ options {
 
 	MiniPascalVariable obterVariavel(Token tk){
 		return (MiniPascalVariable)vars.get(tk.getText());
-	}
-
-	MiniPascalExpression verExpressao(){
-		return (MiniPascalExpression)exprs.peek();
 	}
 }
 
@@ -62,80 +57,21 @@ paramForm: '(' secParamForm (';' secParamForm)* ')' ;
 secParamForm: VAR listaIdent ':' identificador ;
 atribuicao: variavel {
 	ultimaVar=obterVariavel(_input.LT(-1));
-} ':=' expressao ;
+} ':=' {exprs.clear();} expressao ;
 variavel: identificador;
-expressao: {
-		exprs.push(new MiniPascalExpression()); //Adiciona expressão na pilha
-	} expressaoSimp {
+expressao: expressaoSimp (relacao {
 
-		verExpressao().setFactor1(ultFator); //Define a expressão simples como fator 1
+			//TODO: Adicionar operador
 
-	} (
-		relacao {
-
-			verExpressao().setOperator(new MiniPascalOperator(_input.LT(-1).getText())); //Se tiver uma relação, adiciona o operador
-
-		} expressaoSimp {
-			verExpressao().setFactor2(ultFator); //E coloca a próxima expressão simples como fator 2
-
-			ultFator = (MiniPascalFactor)exprs.pop(); // Remove agora essa expressão da pilha
-		}
-	)?
-	{
-
-		//Verificar se a expressão raíz é um fator comum, e não uma expressão. Quer dizer, se só há o fator 1. Quer dizer, se a atribuição da variável não é uma comparação
-		if ( ((MiniPascalExpression)ultFator).getOperator() == null ){
-
-			//Se não houver um operador, torne o último fato um fator comum
-			ultFator = ((MiniPascalExpression)ultFator).getFactor1();
-
-		}
-
-	}
+		} expressaoSimp)?
 	;
 expressaoSimp:
-
-	{
-
-		exprs.push(new MiniPascalExpression()); //Adiciona expressão na pilha
-
-	}
-
 	('+' | '-' {verExpressao().negative();} )? termo
 	{
 		verExpressao().setFactor1(ultFator);
 		int pilhas = 0;
 	}
-	(
-
-			('+' | '-' | OR | '*' | DIV | AND)
-			{
-
-				pilhas++;
-
-				verExpressao().setOperator(new MiniPascalOperator(_input.LT(-1).getText()));} termo {
-
-					MiniPascalExpression e = verExpressao();
-
-					exprs.push(new MiniPascalExpression()); //Adiciona expressão na pilha
-
-					verExpressao().setFactor1(ultFator);
-					e.setFactor2(verExpressao()); //FIXME: Última expressão ainda não tem tipo, é necessário atribuir à ela primeiro
-
-			}
-
-		)*
-
-		{
-
-			while(pilhas>0){
-				pilhas--;
-			}
-
-			ultFator = (MiniPascalExpression)exprs.pop();
-
-
-		}
+	(('+' | '-' | OR | '*' | DIV | AND) termo )*
 
 
 
