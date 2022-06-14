@@ -75,6 +75,10 @@ public class MiniPascalOperator extends MiniPascalFactor{
                     setType(MiniPascalType.BOOLEAN);
                     break;
 
+            case OPENPARENT
+                | CLOSEPARENT:
+                    setType(MiniPascalType.IGNORE);
+
         }
     }
 
